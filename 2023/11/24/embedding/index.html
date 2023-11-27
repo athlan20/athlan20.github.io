@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
+    <meta name="description" content="机器学习中的Embedding:你需要了解的一切" />
+    <meta name="hexo-theme-A4" content="v1.7.8" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <title>Hexo</title>
+
+    
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+    
+    
+<link rel="stylesheet" href="/css/ui.css">
+ 
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--返回顶部css-->
+    
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+    
+<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/unicons.css">
+
+
+    <!--目录-->
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+    
+    <body>
+        
+            <div class="left-toc-container">
+                <nav id="toc" class="bs-docs-sidebar"></nav>
+            </div>
+        
+        <div class="paper">
+            
+            
+            
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+<div class="header">
+    <div class="header-container">
+        <img style="
+        width: 56px;
+        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <div class="header-content">
+            <a class="logo" href="/">Hexo</a> 
+            <span class="description"></span> 
+        </div>
+        
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页</a></li>
+            
+        
+            
+                <li><a href="/list/">文章</a></li>
+            
+        
+    </ul>
+</div> 
+        
+                    
+                    
+
+                    
+                    
+                    
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+
+    
+        <div class="post-main-title">
+            机器学习中的Embedding:你需要了解的一切
+        </div>
+      
+    
+
+    <div class="post-md">
+        
+            
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#One-Hot-Encoding"><span class="post-toc-text">One-Hot Encoding</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SVD"><span class="post-toc-text">SVD</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#BERT"><span class="post-toc-text">BERT</span></a></li></ol>
+            
+        
+        <p>Embedding已经普及到数据科学家的工具箱中，并极大地改变了自然语言处理、计算机视觉和推荐系统的工作方式。然而，许多数据科学家认为它们过时且令人困惑。更多的人在不了解它们是什么的情况下盲目使用它们。在本文中，我们将深入探讨Embedding是什么，它们如何工作，以及它们在实际系统中如何运作。</p>
+<p><strong>什么是Embedding?</strong>  </p>
+<p>要理解Embedding，我们首先需要了解机器学习模型的基本要求。具体来说，大多数机器学习算法只能将低维数值数据作为输入。**<br>**</p>
+<p>在下面的神经网络中，每个输入特征都必须是数字。这意味着在诸如推荐系统之类的领域，我们必须将非数字变量（如项目和用户）转换为数字和向量。我们可以尝试通过产品ID来表示项目；然而，神经网络将数字输入视为连续变量。这意味着较高的数字“大于”较低的数字。它还将相似的数字视为相似的项目。对于“年龄”这样的字段来说，这是非常有道理的，但是当数字表示类别变量时，这是没有意义的。在嵌入之前，最常用的方法之一是one-hot encoding。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37d3c3609a2048a0b209fe654686d47e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>深度神经网络</p>
+<h1 id="One-Hot-Encoding"><a href="#One-Hot-Encoding" class="headerlink" title="One-Hot Encoding"></a>One-Hot Encoding</h1><p>One-hot encoding 是一种常用的表示分类变量的方法。这种无监督技术将单个类别映射到一个向量，并生成二进制表示。实际过程很简单。我们创建一个大小等于类别数量的向量，所有值设置为0。然后将与给定ID或ID关联的行设置为1。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1bad194900c4231a4cb4a6181bc68f5~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>One Hot Encoding 示例图</p>
+<blockquote>
+<p>Categorical:类别,Calories:卡路里</p>
+</blockquote>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe3391eb40694a96beabb29d9675c88a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>自己补充一张图,来更具体体现这种方式的空间浪费(0太多)</p>
+<p>这种技术在将类别转换为一组连续变量方面是可行的，但我们实际上最终得到的是一个包含大量 0 和一个或少量 1 的巨大向量。这种简单性带来了缺点。对于具有许多唯一类别的变量，它会产生无法管理的维数。由于每个项目在向量空间中技术上都是等距离的，因此它省略了相似性周围的上下文。在向量空间中，方差较小的类别与方差较大的类别之间的距离并没有更近。</p>
+<blockquote>
+<p>(方差（Variance）是衡量数据集中各个数据与数据集均值之间差异的统计指标。换句话说，它描述了数据的离散程度或者波动程度。方差越大，说明数据间的差异性越大；方差越小，说明数据间的差异性越小。)  </p>
+</blockquote>
+<p>直观地说，我们希望能够创建一个更密集的类别表示，并保持项目之间的一些隐含关系信息。我们需要一种方法来减少类别变量的数量，这样我们就可以把相似类别的项目放得更近一些。这正是嵌入所做的事情。</p>
+<blockquote>
+<p>总结: 以上提到的这种One-hot两个比较大的缺点是数位空间的浪费(0太多) 以及 不能体现出来两个物品之间的关系</p>
+</blockquote>
+<p><strong>Embeddings解决了编码问题</strong></p>
+<p>Embeddings 是一种将现实世界的对象和关系表示为向量的密集数值表示形式。向量空间量化了类别之间的语义相似性。靠近彼此的嵌入向量被认为是相似的。有时候，它们会被直接用于电子商务商店中的“类似于此的物品”部分。其他时候，Embeddings 会传递给其他模型。在这些情况下，模型可以在类似项目之间共享学习，而不是将它们视为两个完全独特的类别，就像在One-hot encoding中那样。因此，Embeddings 可以用于准确地将稀疏数据（如点击流、文本和电子商务购买）表示为下游模型的特征。</p>
+<p>另一方面，Embeddings 的计算成本要高于One-hot encoding，并且解释性要差得多。</p>
+<p><strong>如何创建</strong>常见的嵌入<strong>Embedding</strong>模型****</p>
+<p>创建Embedding向量的常见方法是首先建立一个有监督的机器学习问题。作为副作用，训练该模型将类别编码为Embedding向量。例如，我们可以建立一个模型，根据用户当前正在观看的电影来预测他们接下来会观看的电影。Embedding 模型会将输入因子化为一个向量，该向量将用于预测下一部电影。这意味着相似的向量是在相似的电影之后常常观看的电影。这为个性化提供了很好的表示。因此，尽管我们正在解决一个有监督的问题，通常称为替代问题，但Embedding 向量的实际创建是一个无监督的过程。</p>
+<blockquote>
+<p>无监督过程（Unsupervised process）是指算法从未标记或未分类的数据中学习模式和特征，而无需预先给定正确答案或特定目标</p>
+<p>有监督过程（Supervised process）是指在机器学习和人工智能领域中，算法根据带有标签的训练数据学习模式和特征</p>
+</blockquote>
+<p>定义替代问题是一门艺术，并且会极大地影响Embedding的行为。例如，YouTube的推荐团队意识到，使用“预测用户下一步要点击的视频”作为替代问题导致了大量的点击诱饵被推荐。他们改用“预测下一个视频以及用户将观看该视频的时长”作为替代问题，取得了更好的结果。</p>
+<blockquote>
+<p>替代问题（Surrogate problem）是指用于近似解决原始问题的辅助问题。</p>
+</blockquote>
+<p><strong>常见的</strong> <strong>常见的嵌入模型</strong> <strong>模型</strong>  </p>
+<p><strong>主成分分析(PCA)</strong>**<br>**</p>
+<p>生成Embedding的一种方法称为主成分分析（PCA）。PCA通过将变量压缩到一个较小的子集来降低实体的维数。这使得模型的行为更加有效，但使变量更难解释，并通常导致信息损失。PCA的一种流行实现技术叫做奇异值分解（SVD）。</p>
+<h1 id="SVD"><a href="#SVD" class="headerlink" title="SVD"></a>SVD</h1><p>奇异值分解（Singular Value Decomposition），也称为 SVD，是一种降维技术。SVD 通过矩阵分解将数据集特征的数量从 N 维降至 K 维。例如，我们将用户的视频评分表示为一个大小为（用户数量）x（项目数量）的矩阵，其中每个单元格的值是用户给该项目的评分。首先选择一个数字 k，它是我们的Embedding向量大小，并使用 SVD 将其分解为两个矩阵。一个是（用户数量）x k，另一个是 k x（项目数量）。  </p>
+<p>在得到的矩阵中，如果我们将用户向量与物品向量相乘，我们应该得到预测的用户评分。如果我们要将两个矩阵相乘，我们最终会得到一个原始矩阵，但它会密集地填充我们所有的预测评分。由此可见，两个具有相似向量的物品会得到相同用户的相似评分。通过这种方式，我们最终创建了用户和物品的Embedding。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/627abbbdad1e411f893a6e8b0a68e59d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>Word2Vec</strong></p>
+<p>Word2vec通过词语生成embeddings。词语被编码成一种one-hot向量并输入到一个生成隐藏权重的隐藏层。然后使用这些隐藏权重来预测其他附近的词语。尽管这些隐藏权重用于训练，但word2vec在训练任务中不会使用它们。相反，隐藏权重作为embeddings返回，而模型则被丢弃。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5790ebf219324af2bf5cb90fd3a80d3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>在相似上下文中出现的词语将具有相似的嵌入。除此之外，嵌入还可以用于形成类比。例如，从国王到男人的向量与从女王到女人的向量非常相似。  </p>
+<p>Word2Vec的一个问题是单个词语只有一个向量映射。这意味着一个词的所有语义用法都被合并到一个表示中。例如，“I’m going to see a play”和“I want to play”中的单词“play”将具有相同的embedding，而无法区分上下文。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe1e6f8cf18c48a0af42ee9b47eed52d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h1><p>Bidirectional Encoder Representations of Transformers(BERT),是一个预训练模型，解决了Word2Vec的上下文问题。BERT分两步进行训练。首先，它在像维基百科这样的大量语料库上进行训练，生成与Word2Vec类似的embedding。第二步训练由最终用户执行。他们在适合自己上下文的语料库上进行训练，例如医学文献。BERT将针对该特定用例进行微调。同时，为了创建词嵌入，BERT考虑了词的上下文。这意味着“I’m going to see a play”和“I want to play”中的单词“play”将正确地具有不同的嵌入。BERT已经成为生成文本嵌入的首选变换器模型。  </p>
+<p><strong>在现实世界中的</strong>Embedding<strong>s</strong>  </p>
+<p>Embedding的使用始于研究实验室，并迅速成为了最先进的技术。从那时起，Embedding已经广泛应用于各种不同领域的生产级机器学习系统，包括自然语言处理、推荐系统和计算机视觉等。  </p>
+<p><strong>推荐系统</strong>  </p>
+<p>推荐系统可以预测用户对各种实体&#x2F;产品的偏好和评分。最常见的两种方法是协同过滤和基于内容的过滤。协同过滤使用用户行为数据进行训练和形成推荐。现代协同过滤系统几乎都使用Embeddings。例如，我们可以使用上面定义的奇异值分解（SVD）方法来构建一个推荐系统。在该系统中，用户Embeddings与物品Embeddings相乘可以生成一个评分预测。这为用户和产品之间提供了一个明确的关系。相似的物品会从相似的用户那里获得相似的评分。这个特性也可以用于下游模型。例如，YouTube的推荐系统将Embeddings作为输入，用于神经网络来预测观看时长。**<br>**</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b29becb2b2b1401284a855bbbb5249d8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>图3：深度候选生成模型架构，展示了嵌入式稀疏特征与密集特征的连接。在连接之前，对嵌入进行平均处理，将可变大小的稀疏ID包转换为适合输入到隐藏层的固定宽度向量。所有隐藏层都是全连接的。在训练过程中，通过在采样softmax的输出上进行梯度下降，最小化交叉熵损失。在服务过程中，执行近似的最近邻查找，生成数百个候选视频推荐。</p>
+<p><strong>语义搜索</strong>  </p>
+<p>用户希望搜索栏比正则表达式更智能。无论是客户支持页面、博客还是谷歌，搜索栏应该理解查询的意图和上下文，而不仅仅是查看单词。搜索引擎过去是围绕TF-IDF构建的，它也可以从文本中创建嵌入。这种语义搜索是通过使用最近邻算法找到与查询嵌入最接近的文档嵌入来实现的。</p>
+<p>如今，语义搜索利用更复杂的Embedding技术，如BERT，并可能在下游模型中使用它们。实际上，谷歌甚至在其大部分查询中都使用了BERT：</p>
+<p><a target="_blank" rel="noopener" href="https://searchengineland.com/google-bert-used-on-almost-every-english-query-342193/">https://searchengineland.com/google-bert-used-on-almost-every-english-query-342193/</a>**<br>**</p>
+<p><strong>计算机视觉</strong>  </p>
+<p>在计算机视觉中，Embedding通常用作在不同上下文之间进行转换的方式。例如，如果训练一辆自动驾驶汽车，我们可以将汽车的图像转换为嵌入，然后根据该嵌入上下文决定如何操作。这样做可以实现迁移学习。我们可以从像《侠盗猎车手》这样的游戏中获取生成的图像，将其转换为同一向量空间中的Embedding，并在不需要提供大量昂贵的真实世界图像的情况下训练驾驶模型。特斯拉现在正在实践这一点。</p>
+<p>另一个有趣的例子是AI艺术生成器：</p>
+<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1n_xrgKDlGQcCF6O-eL3NOd_x4NSqAUjK#scrollTo=TnMw4FrN6JeB">https://colab.research.google.com/drive/1n_xrgKDlGQcCF6O-eL3NOd_x4NSqAUjK#scrollTo=TnMw4FrN6JeB</a>.</p>
+<p>它会根据用户输入的文本生成图像。例如，如果我们输入“怀旧”，我们会得到如下图像。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6b958cdded204eeeb509d903fcf80eda~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>它的工作原理是将用户的文本和图像转换为相同潜在空间中的嵌入。它由四个转换器组成：图像-&gt;嵌入，文本-&gt;嵌入，嵌入-&gt;文本，图像-&gt;文本。有了所有这些转换，我们可以使用嵌入作为中间表示来将文本转换为图像，反之亦然。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/34e6c136245642cf9f0da431d2b54bc8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>减法&#x2F;加法</strong>  </p>
+<p>我们之前提到过，词Embeddings还通过向量差异对类比进行编码。向量的加法和减法可以用于各种任务。例如，我们可以找到便宜品牌和奢侈品牌之间的平均差异。我们可以存储这个差值，并在我们想要推荐与用户正在查看的当前商品类似的奢侈品时使用它。我们可以找到可乐和健怡可乐之间的差异，并将其应用到其他饮料上，即使那些没有低糖版本的饮料，也可以找到最接近低糖版本的饮料。**<br>**</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/96e8dde7480d43f8bbb6b6b240f85e6c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>最近邻算法</strong>  </p>
+<p>最近邻（NN）通常是最有用的嵌入操作。它可以找到与当前嵌入相似的内容。在推荐系统中，我们可以创建一个用户嵌入，并找到与他们最相关的项目。在搜索引擎中，我们可以找到与搜索查询最相似的文档。然而，最近邻算法在计算上是非常昂贵的。如果用朴素的方法执行，它的时间复杂度为O(N<em>K)，其中N是项目数量，K是每个嵌入的大小。然而，在大多数需要最近邻的情况下，近似值就足够了。如果我们向用户推荐五个项目，其中一个在技术上是第六个最接近的项目，用户可能不会在意。近似最近邻（ANN）算法通常将查找的复杂度降低到O(log(n))。</em>*<br>**</p>
+<p><strong>近似最近邻算法的实现</strong>  </p>
+<p>有许多不同的算法可以有效地找到近似的最近邻，而且每种算法都有很多实现。我们将在下面列出一些最常见的算法和实现，并从高层次解释它们的工作原理。**<br>**</p>
+<p><strong>Spotify’s Annoy</strong>  </p>
+<p>在Spotify的近似最近邻实现（Annoy）中，将Embedding转换为一组树。每棵树都是通过随机投影构建的。在树的每个中间节点，选择一个随机超平面，将空间划分为两个子空间。通过对子集中的两个点进行采样并取与它们等距离的超平面来选择这个超平面。这个过程执行k次以生成一个森林。查找是通过对最近的树进行中序遍历完成的。Annoy的方法允许将索引分割成多个静态文件，将索引映射到内存中，并可以调整树的数量以改变速度和准确性。**<br>**</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f9977b7c97604fb9bab40ea17ac7ce78~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>这是Annoy如何通过随机投影将Embedding分解成多个树的索引</p>
+<p><strong>局部敏感哈希（LSH，Locality Sensitive Hashing）</strong>  </p>
+<p>局部敏感哈希（LSH）是另一种常见的方法。LSH使用哈希表，并将附近的点存储在各自的桶中。为了创建索引，LSH运行许多哈希函数，将相似的点放在同一个桶中。通过这样做，LSH将距离较大的点保持在不同的桶中。要检索最近邻，对目标点进行哈希，执行查找并返回距离最近的查询点。一些优点包括子线性运行时间，对数据分布没有依赖，以及能够使用现有的数据结构来微调准确性。**<br>**</p>
+<p><strong>Facebook的FAISS和分层可导航小世界图（HNSW，Hierarchical Navigable Small World Graphs）</strong>  </p>
+<p>Facebook的实现，FAISS，使用分层可导航小世界图（HNSW，Hierarchical Navigable Small World Graphs）。HNSW在准确性和召回率方面通常表现良好。它利用分层图创建通向特定区域的平均路径。该图具有分层的、可传递的结构，节点之间的平均距离较小。HNSW遍历图，在每次迭代中找到最近的相邻节点，并记录到目前为止看到的“最佳”邻居。HNSW具有多项对数时间复杂度（O(logN)）。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7acd7c2e70894d3aad422939ffdb0cac~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>HNSW通过创建分层索引来实现更快的最近邻查找。</p>
+<p><strong>如何embeddings是如何操作的</strong>  </p>
+<p>将嵌入式技术从实验室移至实际应用系统中，暴露出当前数据基础设施能力中的实际差距。例如，传统数据库和缓存不支持最近邻查找等操作。专门的近似最近邻索引缺乏持久性存储和其他用于生产环境的功能。MLOps系统缺乏专用方法来管理embedding的版本控制、访问和训练。现代机器学习系统需要一个embedding式存储：一个从基本概念就围绕着机器学习工作流和embedding技术构建的数据库。**<br>**</p>
+<p>将embedding技术投入生产并非易事。我们目前看到的最常见的embedding实现方法是通过Redis、Postgres和S3 + Annoy&#x2F;FAISS。我们将介绍每种实现的典型情况以及每种实现所面临的挑战。</p>
+<p><strong>Redis</strong>  </p>
+<p>Redis是一个超快的内存对象存储。它可以快速地通过键存储和获取嵌入。然而，它没有任何原生embedding操作。它不能进行最近邻查找，也不能添加或平均向量。所有这些操作都必须在模型服务上完成。此外，它在典型的MLOps工作流程中并不能很好地适应。它不支持版本控制、回滚或保持不变性。在训练过程中，Redis客户端不会自动缓存embedding，这可能导致不必要的压力和成本。同时，它还不支持对嵌入进行分区和创建子索引。  </p>
+<p><strong>Postgres</strong>  </p>
+<p>Postgres比Redis更加多功能，但速度要慢得多。通过插件，它可以手动执行一些向量操作。然而，它没有一个高性能的最近邻索引。此外，在模型的关键路径中添加Postgres查找可能会增加太多延迟。最后，Postgres在训练时没有很好的方法在客户端缓存embedding，导致训练速度非常非常慢。</p>
+<p><strong>S3文件 + Annoy&#x2F;FAISS</strong></p>
+<p>S3是Amazon Web Services（AWS）提供的一种简单存储服务，Annoy和FAISS是两种用于处理embedding搜索和近似最近邻查找问题的库。将S3文件与Annoy&#x2F;FAISS结合使用可以在处理大量embedding数据时提供一定程度的性能优势。</p>
+<p><strong>Embedding 中心</strong></p>
+<p>使用embedding式技术的机器学习系统需要一种数据基础设施，具备以下特点：</p>
+<ul>
+<li>能够持久、高可用地存储嵌入数据</li>
+<li>支持近似最近邻操作</li>
+<li>支持其他操作，如分区、子索引和平均</li>
+<li>便捷地管理版本控制、访问控制和回滚操作</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2fd6d28c5a4d4aac9896ce4a17a4d0ac~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>有一些公司（如Pinterest）已经构建了自己的内部embedding数据基础设施，但市场上仍然存在空白。一些创业公司已经筹集了数百万美元来构建专有系统，还有一些数据库公司尝试在现有产品基础上增加最近邻搜索功能。然而，这个领域仍有待进一步发展和完善。</p>
+<p>目前市场上明显缺少一个开源的embedding存储解决方案，我们决定尝试填补这一空白。我们已经在GitHub上发布了Embedding Hub的初始版本(<a target="_blank" rel="noopener" href="https://github.com/featureform/embeddings)%E3%80%82%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AE%B6%E8%AF%95%E7%94%A8%EF%BC%8C%E6%8F%90%E5%87%BA%E6%82%A8%E7%9A%84%E6%84%8F%E8%A7%81%E5%92%8C%E9%97%AE%E9%A2%98%EF%BC%8C%E5%B9%B6%E7%BB%99%E6%88%91%E4%BB%AC%E4%B8%80%E4%B8%AA%E6%98%9F%E6%A0%87%EF%BC%81">https://github.com/featureform/embeddings)。欢迎大家试用，提出您的意见和问题，并给我们一个星标！</a></p>
+<p><strong>总结</strong></p>
+<p>Embedding是数据科学工具包中至关重要的部分，并且越来越受欢迎。Embedding使团队能够在多个领域，从自然语言处理到推荐系统，打破现有技术水平。随着它们的普及，将会有越来越多的关注点放在将其实现在实际系统中。我们认为，Embedding存储将成为机器学习基础设施的关键组成部分，这也是我们开源我们的Embedding存储项目的原因。</p>
+<blockquote>
+<p>原文: <a target="_blank" rel="noopener" href="https://www.featureform.com/post/the-definitive-guide-to-embeddings">https://www.featureform.com/post/the-definitive-guide-to-embeddings</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2023-11-24</span>
+            
+            
+             
+        
+        </i>
+    </div>
+    
+        
+
+     
+</div>
+
+
+
+                                      
+                    
+                    
+                    <div class="footer">
+    
+        <span> 
+            © 1949-2023 China 
+
+            
+                
+
+            
+        </span>
+    
+</div>
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+
+<!--回到顶部按钮-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+<script src="/js/returnToTop.js"></script>
+
+
+<!--目录-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+
+<script src="/js/toc.js"></script>
+
+
+
+
+<script src="/js/randomHeaderContent.js"></script>
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->  
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+
+
+    <!--暗黑模式-->
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+        const options = {
+            bottom: '53px', // default: '32px'
+            right: 'unset', // default: '32px'
+            left: '42px', // default: 'unset'
+            time: '0.3s', // default: '0.3s'
+            mixColor: '#fff', // default: '#fff'
+            backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+            buttonColorDark: '#100f2c',  // default: '#100f2c'
+            buttonColorLight: '#fff', // default: '#fff'
+            saveInCookies: true, // default: true,
+            label: '🌓', // default: ''
+            autoMatchOsTheme: true // default: true
+        }
+    
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+        
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
+  
+</html>
