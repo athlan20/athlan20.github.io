@@ -3,7 +3,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
-    <meta name="description" content="理解React中的 Reducer" />
+    <meta name="description" content="理解React中的Reducer" />
     <meta name="hexo-theme-A4" content="v1.7.9" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>云天游的博客</title>
@@ -109,7 +109,7 @@
 
     
         <div class="post-main-title">
-            理解React中的 Reducer
+            理解React中的Reducer
         </div>
       
     
@@ -117,10 +117,51 @@
     <div class="post-md">
         
             
-                
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="post-toc-text">示例代码</span></a></li></ol>
             
         
-        <p>理解React中的Reducer</p>
+        <p><strong>Reducer的定义</strong>：在React中，一个Reducer是一个函数，它接收当前状态和一个动作（action），然后返回一个新的状态。这个概念来源于函数式编程，特别是在Flux架构模式中的使用。</p>
+<p><strong>工作方式</strong>：Reducer函数通常用于管理应用的状态。在一个简单的购物车应用中，比如，Reducer可能会处理添加商品到购物车、移除商品或清空购物车的动作。</p>
+<p><strong>纯函数</strong>：Reducer必须是纯函数，意味着给定相同的输入，它总是返回相同的输出，并且不产生副作用。</p>
+<p><strong>使用场景</strong>：在React的上下文中，Reducer经常与<code>useReducer</code>钩子结合使用，为组件提供更复杂的状态逻辑管理，或者与Redux等状态管理库结合使用。</p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>下面是一个使用<code>counterReducer</code>的React组件示例：</p>
+<pre><code class="tsx">import React, &#123; useReducer &#125; from &#39;react&#39;;
+
+type Action = &#123; type: &#39;increment&#39; &#125; | &#123; type: &#39;decrement&#39; &#125;;
+
+function counterReducer(state: number, action: Action): number &#123;
+    switch (action.type) &#123;
+        case &#39;increment&#39;:
+            return state + 1;
+        case &#39;decrement&#39;:
+            return state - 1;
+        default:
+            return state;
+    &#125;
+&#125;
+
+const CounterComponent = () =&gt; &#123;
+    const [count, dispatch] = useReducer(counterReducer, 0);
+
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: &#123;count&#125;&lt;/p&gt;
+            &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &#39;increment&#39; &#125;)&#125;&gt;Increment&lt;/button&gt;
+            &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &#39;decrement&#39; &#125;)&#125;&gt;Decrement&lt;/button&gt;
+        &lt;/div&gt;
+    );
+&#125;;
+
+export default CounterComponent;
+</code></pre>
+<p>在这个组件中：</p>
+<ul>
+<li>我们通过调用<code>useReducer</code>，将<code>counterReducer</code>和初始状态<code>0</code>传入。</li>
+<li><code>useReducer</code>返回一个状态（<code>count</code>）和一个<code>dispatch</code>函数。</li>
+<li>当用户点击按钮时，我们使用<code>dispatch</code>函数发送一个<code>increment</code>或<code>decrement</code>动作到<code>counterReducer</code>。</li>
+<li><code>counterReducer</code>根据动作类型更新状态，并返回新的状态值。</li>
+<li>更新的状态值（<code>count</code>）被用来在UI中展示。</li>
+</ul>
 
     </div>
 

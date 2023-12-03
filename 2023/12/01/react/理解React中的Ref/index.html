@@ -117,10 +117,10 @@
     <div class="post-md">
         
             
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Refs"><span class="post-toc-text">深入理解React中的Refs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#createRef%EF%BC%9A%E7%B1%BB%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8"><span class="post-toc-text">createRef：类组件中的引用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#useRef%EF%BC%9A%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E7%9A%84Hook"><span class="post-toc-text">useRef：函数组件的Hook</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-1"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#forwardRef%EF%BC%9A%E4%BC%A0%E9%80%92Refs"><span class="post-toc-text">forwardRef：传递Refs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-2"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#createRef%EF%BC%9A%E7%B1%BB%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8"><span class="post-toc-text">createRef：类组件中的引用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#useRef%EF%BC%9A%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E7%9A%84Hook"><span class="post-toc-text">useRef：函数组件的Hook</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-1"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#forwardRef%EF%BC%9A%E4%BC%A0%E9%80%92Refs"><span class="post-toc-text">forwardRef：传递Refs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-2"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li></ol>
             
         
-        <h1 id="深入理解React中的Refs"><a href="#深入理解React中的Refs" class="headerlink" title="深入理解React中的Refs"></a>深入理解React中的Refs</h1><p>在React的世界里，<code>refs</code>是一种特殊的属性，它允许我们直接访问DOM节点或React元素。在实际应用中，我们可能需要直接操作DOM、管理焦点、触发动画或集成第三方DOM库，这时<code>refs</code>就显得尤为重要。本文将深入探讨React中几种不同类型的<code>ref</code>，帮助你更好地理解和使用它们。</p>
+        <p><strong>Ref的定义</strong>：在React的世界里，<code>refs</code>是一种特殊的属性，它允许我们直接访问DOM节点或React元素。在实际应用中，我们可能需要直接操作DOM、管理焦点、触发动画或集成第三方DOM库，这时<code>refs</code>就显得尤为重要。本文将深入探讨React中几种不同类型的<code>ref</code>，帮助你更好地理解和使用它们。</p>
 <h2 id="createRef：类组件中的引用"><a href="#createRef：类组件中的引用" class="headerlink" title="createRef：类组件中的引用"></a>createRef：类组件中的引用</h2><p><code>createRef</code>是React中最常用的<code>ref</code>类型。主要用于类组件，它可以帮助我们获取DOM元素或类实例的直接引用。</p>
 <h3 id="示例用法"><a href="#示例用法" class="headerlink" title="示例用法"></a>示例用法</h3><p>在类组件中，你可以通过以下方式创建并使用<code>createRef</code>：</p>
 <pre><code class="tsx">class MyComponent extends React.Component &#123;
@@ -162,7 +162,7 @@ const ref = React.createRef();
     <div class="post-meta">
         <i>
         
-            <span>2023-11-30</span>
+            <span>2023-12-01</span>
             
                 <span>该篇文章被 ling</span>
             
