@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
+    <meta name="description" content="理解React中的Context" />
+    <meta name="hexo-theme-A4" content="v1.7.9" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <title>云天游的博客</title>
+
+    
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+    
+    
+<link rel="stylesheet" href="/css/ui.css">
+ 
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--返回顶部css-->
+    
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+    
+<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/unicons.css">
+
+
+    <!--目录-->
+    
+<link rel="stylesheet" href="/css/toc.css">
+
+
+    <!--自定义css加载-->
+    
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+    
+    
+    <body>
+        
+            <div class="left-toc-container">
+                <nav id="toc" class="bs-docs-sidebar"></nav>
+            </div>
+        
+        <div class="paper">
+            
+            
+            
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+<div class="header">
+    <div class="header-container">
+        <img style="
+        width: 56px;
+        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <div class="header-content">
+            <a class="logo" href="/">云天游的博客</a> 
+            <span class="description"></span> 
+        </div>
+        
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页</a></li>
+            
+        
+            
+                <li><a href="/list/">文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">分类</a></li>
+            
+        
+    </ul>
+</div> 
+        
+                    
+                    
+
+                    
+                    
+                    
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+
+    
+        <div class="post-main-title">
+            理解React中的Context
+        </div>
+      
+    
+
+    <div class="post-md">
+        
+            
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#React-Context-API-%E7%AE%80%E4%BB%8B"><span class="post-toc-text">React Context API 简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8-Context-API-%E4%B8%BB%E8%A6%81%E6%B6%89%E5%8F%8A%E4%B8%89%E4%B8%AA%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="post-toc-text">使用 Context API 主要涉及三个步骤：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%BB%E9%A2%98%E5%88%87%E6%8D%A2%E5%99%A8"><span class="post-toc-text">示例：创建一个主题切换器</span></a></li></ol>
+            
+        
+        <h3 id="React-Context-API-简介"><a href="#React-Context-API-简介" class="headerlink" title="React Context API 简介"></a>React Context API 简介</h3><p>React 的 Context API 允许您在组件树中传递数据，而无需通过每个层级手动传递 props。这对于共享那些对于许多组件来说是“全局”的数据（如主题、用户信息等）特别有用。</p>
+<h4 id="使用-Context-API-主要涉及三个步骤："><a href="#使用-Context-API-主要涉及三个步骤：" class="headerlink" title="使用 Context API 主要涉及三个步骤："></a>使用 Context API 主要涉及三个步骤：</h4><ol>
+<li><strong>创建 Context：</strong> 使用 <code>React.createContext()</code> 创建一个新的 Context 对象。</li>
+<li><strong>提供 Context 值：</strong> 使用 <code>Context.Provider</code> 组件包裹组件树的一部分，并通过 <code>value</code> 属性传递数据。</li>
+<li><strong>消费 Context 值：</strong> 使用 <code>Context.Consumer</code> 或 <code>useContext</code> 钩子在子组件中访问 Context 值。</li>
+<li><strong>副作用 Context 值：</strong> 使用useEffect第二个参数来响应context中值的变化。</li>
+</ol>
+<h3 id="示例：创建一个主题切换器"><a href="#示例：创建一个主题切换器" class="headerlink" title="示例：创建一个主题切换器"></a>示例：创建一个主题切换器</h3><p>假设我们要创建一个允许用户在“亮”和“暗”主题之间切换的应用程序。</p>
+<ol>
+<li><strong>创建 Context：</strong></li>
+</ol>
+<pre><code class="tsx">import React, &#123; createContext, useState, useContext &#125; from &#39;react&#39;;
+
+interface ThemeContextType &#123;
+  theme: string;
+  toggleTheme: () =&gt; void;
+&#125;
+
+const ThemeContext = createContext&lt;ThemeContextType | undefined&gt;(undefined);
+</code></pre>
+<ol start="2">
+<li><strong>提供 Context 值：</strong>( **需要特别关注toggleTheme和setTheme的写法和关系 )</li>
+</ol>
+<pre><code class="tsx">const ThemeProvider: React.FC = (&#123; children &#125;) =&gt; &#123;
+  const [theme, setTheme] = useState(&#39;light&#39;);
+
+  const toggleTheme = () =&gt; &#123;
+    setTheme(theme === &#39;light&#39; ? &#39;dark&#39; : &#39;light&#39;);
+  &#125;;
+
+  return (
+    &lt;ThemeContext.Provider value=&#123;&#123; theme, toggleTheme &#125;&#125;&gt;
+      &#123;children&#125;
+    &lt;/ThemeContext.Provider&gt;
+  );
+&#125;;
+</code></pre>
+<ol start="3">
+<li><strong>消费 Context 值：</strong></li>
+</ol>
+<pre><code class="tsx">const ThemeSwitcher: React.FC = () =&gt; &#123;
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) &#123;
+    throw new Error(&#39;ThemeSwitcher must be used within a ThemeProvider&#39;);
+  &#125;
+
+  return (
+    &lt;button onClick=&#123;themeContext.toggleTheme&#125;&gt;
+      Switch to &#123;themeContext.theme === &#39;light&#39; ? &#39;Dark&#39; : &#39;Light&#39;&#125; Theme
+    &lt;/button&gt;
+  );
+&#125;;
+</code></pre>
+<ol start="4">
+<li><strong>副作用 Context 值：</strong></li>
+</ol>
+<pre><code class="tsx">  useEffect(() =&gt; &#123;
+    // 这里是您想要执行的副作用
+    console.log(`The current theme is: $&#123;themeContext.theme&#125;`);
+
+    return () =&gt; &#123;
+
+      // 清理工作（如果有的话）
+      console.log(`Cleaning up for theme: $&#123;themeContext.theme&#125;`);
+    &#125;;
+
+  &#125;, [themeContext.theme]); // 仅在 themeContext.theme 更改时运行
+</code></pre>
+<ol start="5">
+<li><strong>在应用中使用：</strong></li>
+</ol>
+<pre><code class="tsx">const App: React.FC = () =&gt; &#123;
+  return (
+    &lt;ThemeProvider&gt;
+      &lt;div&gt;
+        &lt;h1&gt;Welcome to the Theme Switcher App&lt;/h1&gt;
+        &lt;ThemeSwitcher /&gt;
+      &lt;/div&gt;
+    &lt;/ThemeProvider&gt;
+  );
+&#125;;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://playcode.io/1681725">以上代码playground</a></p>
+<p>在这个例子中，我们创建了一个 <code>ThemeContext</code> 来存储当前主题和一个方法来切换主题。<code>ThemeProvider</code> 组件提供了这个上下文的值，而 <code>ThemeSwitcher</code> 组件消费这个值来渲染一个按钮，允许用户切换主题。</p>
+<p>这只是一个基本的例子，但它展示了如何在 TypeScript 中使用 React Context API。您可以根据需要扩展和修改这个模式，以适应更复杂的应用程序需求。</p>
+
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2023-12-01</span>
+            
+                <span>该篇文章被 ling</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/React/'>
+                            React
+                        </a>
+                    
+                        <a href='/tags/tsx/'>
+                            tsx
+                        </a>
+                    
+                        <a href='/tags/context/'>
+                            context
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/'>
+                            前端开发
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    
+        
+
+     
+</div>
+
+
+
+                                      
+                    
+                    
+                    <div class="footer">
+    
+        <span> 
+            © 1949-2023 China 
+
+            
+                
+
+            
+        </span>
+    
+</div>
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+    
+<script src="/js/highlight.min.js"></script>
+
+    
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+
+<!--回到顶部按钮-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+<script src="/js/returnToTop.js"></script>
+
+
+<!--目录-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+
+<script src="/js/toc.js"></script>
+
+
+
+
+<script src="/js/randomHeaderContent.js"></script>
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->  
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+
+
+    <!--暗黑模式-->
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+        const options = {
+            bottom: '53px', // default: '32px'
+            right: 'unset', // default: '32px'
+            left: '42px', // default: 'unset'
+            time: '0.3s', // default: '0.3s'
+            mixColor: '#fff', // default: '#fff'
+            backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+            buttonColorDark: '#100f2c',  // default: '#100f2c'
+            buttonColorLight: '#fff', // default: '#fff'
+            saveInCookies: true, // default: true,
+            label: '🌓', // default: ''
+            autoMatchOsTheme: true // default: true
+        }
+    
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+        
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
+  
+</html>
