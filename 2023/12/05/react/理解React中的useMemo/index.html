@@ -3,7 +3,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
-    <meta name="description" content="理解React中的Reducer" />
+    <meta name="description" content="理解React中的useMemo" />
     <meta name="hexo-theme-A4" content="v1.7.9" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>云天游的博客</title>
@@ -109,7 +109,7 @@
 
     
         <div class="post-main-title">
-            理解React中的Reducer
+            理解React中的useMemo
         </div>
       
     
@@ -117,62 +117,63 @@
     <div class="post-md">
         
             
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="post-toc-text">示例代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8"><span class="post-toc-text">进阶使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Reducer%E7%BB%84%E5%90%88"><span class="post-toc-text">Reducer组合</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8Context-API%E5%92%8CuseReducer%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%80%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="post-toc-text">使用Context API和useReducer实现全局状态管理</span></a></li></ol>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#useMemo-%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="post-toc-text">useMemo 的技术细节</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="post-toc-text">工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="post-toc-text">示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%9D%E8%80%83"><span class="post-toc-text">思考</span></a></li></ol>
             
         
-        <p><strong>Reducer的定义</strong>：在React中，一个Reducer是一个函数，它接收当前状态和一个动作（action），然后返回一个新的状态。这个概念来源于函数式编程，特别是在Flux架构模式中的使用。</p>
-<p><strong>工作方式</strong>：Reducer函数通常用于管理应用的状态。在一个简单的购物车应用中，比如，Reducer可能会处理添加商品到购物车、移除商品或清空购物车的动作。</p>
-<p><strong>纯函数</strong>：Reducer必须是纯函数，意味着给定相同的输入，它总是返回相同的输出，并且不产生副作用。</p>
-<p><strong>使用场景</strong>：在React的上下文中，Reducer经常与<code>useReducer</code>钩子结合使用，为组件提供更复杂的状态逻辑管理，或者与Redux等状态管理库结合使用。</p>
-<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>下面是一个使用<code>counterReducer</code>的React组件示例：</p>
-<pre><code class="tsx">import React, &#123; useReducer &#125; from &#39;react&#39;;
+        <h3 id="useMemo-的技术细节"><a href="#useMemo-的技术细节" class="headerlink" title="useMemo 的技术细节"></a>useMemo 的技术细节</h3><p><code>useMemo</code> 是 React 的一个钩子，它用于对计算结果进行记忆。当你有一些计算代价较高的操作时，<code>useMemo</code> 可以帮助你避免在每次渲染时都重新计算，从而提升性能。</p>
+<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><ul>
+<li><code>useMemo(() =&gt; computeExpensiveValue(a, b), [a, b])</code> 接受一个“创建”函数和一个依赖项数组。</li>
+<li>如果依赖项数组中的任何一个依赖项发生了变化，React 将重新调用“创建”函数来计算新的值；如果没有变化，React 将返回上一次计算的值。<br>想象 <code>useMemo</code> 像是一个聪明的助手，它记住了你上次做复杂计算的结果。每次你需要这个结果时，如果输入（依赖项）没变，它就直接给你上次的答案，而不是重新计算一遍。</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><pre><code class="tsx">import React, &#123; useMemo, useState &#125; from &#39;react&#39;;
 
-type Action = &#123; type: &#39;increment&#39; &#125; | &#123; type: &#39;decrement&#39; &#125;;
+const MyComponent = () =&gt; &#123;
+  const [count, setCount] = useState(0);
 
-function counterReducer(state: number, action: Action): number &#123;
-    switch (action.type) &#123;
-        case &#39;increment&#39;:
-            return state + 1;
-        case &#39;decrement&#39;:
-            return state - 1;
-        default:
-            return state;
+  // 一个复杂的计算函数
+  const expensiveComputation = (num) =&gt; &#123;
+    let result = 0;
+    for (let i = 0; i &lt; 1000000; i++) &#123;
+      result += num;
     &#125;
-&#125;
+    return result;
+  &#125;;
 
-const CounterComponent = () =&gt; &#123;
-    const [count, dispatch] = useReducer(counterReducer, 0);
+  // 使用useMemo来记忆这个计算结果
+  const computedValue = useMemo(() =&gt; expensiveComputation(count), [count]);
 
-    return (
-        &lt;div&gt;
-            &lt;p&gt;Count: &#123;count&#125;&lt;/p&gt;
-            &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &#39;increment&#39; &#125;)&#125;&gt;Increment&lt;/button&gt;
-            &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &#39;decrement&#39; &#125;)&#125;&gt;Decrement&lt;/button&gt;
-        &lt;/div&gt;
-    );
+  return (
+    &lt;div&gt;
+      &lt;p&gt;&#123;computedValue&#125;&lt;/p&gt;
+      &lt;button onClick=&#123;() =&gt; setCount(c =&gt; c + 1)&#125;&gt;增加&lt;/button&gt;
+    &lt;/div&gt;
+  );
 &#125;;
 
-export default CounterComponent;
+export default MyComponent;
 </code></pre>
-<p>在这个组件中：</p>
+<p>在这个例子中，只有当 <code>count</code> 改变时，<code>expensiveComputation</code> 函数才会被重新调用。否则，它将返回上一次计算的结果。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><code>useMemo</code> 和 <code>useCallback</code>有什么不同？ (<a href="/2023/12/03/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84useCallback/" title="理解React中的useCallback">理解React中的useCallback</a>)<br><code>usememo</code> 是缓存一个具体的值，<code>usecallback</code> 是缓存一个函数</p>
+<p>在哪些情况下不应该使用 <code>useMemo</code>,而哪些情况应该使用呢？<br><strong>不应使用 <code>useMemo</code> 的情况</strong>:</p>
 <ul>
-<li>我们通过调用<code>useReducer</code>，将<code>counterReducer</code>和初始状态<code>0</code>传入。</li>
-<li><code>useReducer</code>返回一个状态（<code>count</code>）和一个<code>dispatch</code>函数。</li>
-<li>当用户点击按钮时，我们使用<code>dispatch</code>函数发送一个<code>increment</code>或<code>decrement</code>动作到<code>counterReducer</code>。</li>
-<li><code>counterReducer</code>根据动作类型更新状态，并返回新的状态值。</li>
-<li>更新的状态值（<code>count</code>）被用来在UI中展示。</li>
+<li><strong>计算不复杂</strong>: 当计算代价不大，即使在每次渲染时重复进行也不会显著影响性能时，使用 <code>useMemo</code> 可能是过度优化。</li>
+<li><strong>依赖项频繁变化</strong>: 如果 <code>useMemo</code> 的依赖项经常变化，导致记忆化值频繁重新计算，这样使用 <code>useMemo</code> 反而会增加性能负担而非减轻。</li>
+<li><strong>优化效果不明显</strong>: 如果被记忆化的值用于少数几个组件，且这些组件的渲染不会因此而显著优化，那么使用 <code>useMemo</code> 可能不会带来实际的性能提升。</li>
+<li><strong>仅用于原始值</strong>: 对于简单的原始值（如数字、字符串、布尔值）的计算，由于它们本身就很快，使用 <code>useMemo</code> 通常没有必要。</li>
 </ul>
-<h3 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h3><h4 id="Reducer组合"><a href="#Reducer组合" class="headerlink" title="Reducer组合"></a>Reducer组合</h4><p>在大型应用中，你可能会有多个Reducer，每个Reducer管理应用状态的不同部分。Reducer组合（combineReducers）允许你将多个小的、独立管理状态片段的Reducer合并成一个主Reducer，这使得状态管理更加模块化和可维护。</p>
-<ol start="3">
-<li><h3 id="使用Context-API和useReducer实现全局状态管理"><a href="#使用Context-API和useReducer实现全局状态管理" class="headerlink" title="使用Context API和useReducer实现全局状态管理"></a>使用Context API和useReducer实现全局状态管理</h3></li>
-</ol>
+<p><strong>使用 <code>useMemo</code> 的适当时机</strong>:</p>
+<ul>
+<li><strong>计算复杂且耗时</strong>: 当有一些复杂或计算量大的操作，这些操作的结果在多次渲染中可以重用，这时使用 <code>useMemo</code> 可以提高性能。</li>
+<li><strong>避免不必要的渲染</strong>: 当一个组件的子组件仅在某些特定的 prop 发生变化时才需要重新渲染，而这个 prop 是通过复杂计算得出的，使用 <code>useMemo</code> 可以防止不必要的子组件渲染。</li>
+<li><strong>提高响应性</strong>: 在渲染过程中避免执行昂贵的计算，可以使应用更加流畅和响应更快。</li>
+</ul>
 
     </div>
 
     <div class="post-meta">
         <i>
         
-            <span>2023-12-03</span>
+            <span>2023-12-05</span>
             
                 <span>该篇文章被 ling</span>
             
@@ -184,12 +185,8 @@ export default CounterComponent;
                             React
                         </a>
                     
-                        <a href='/tags/tsx/'>
-                            tsx
-                        </a>
-                    
-                        <a href='/tags/useReducer/'>
-                            useReducer
+                        <a href='/tags/useMemo/'>
+                            useMemo
                         </a>
                     
                 </span>

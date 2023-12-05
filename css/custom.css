@@ -1,4 +1,10 @@
+/* 这块是行内的code样式 
 .post-md code {
-    background: #000000;
-    color:white;
+    background-color: gray;
+    color:#00e0e0;
+}*/
+
+pre code.hljs {
+    background: #282b2e;
+    color: #cccccc;
 }
