@@ -154,7 +154,7 @@ const MyComponent = () =&gt; &#123;
 export default MyComponent;
 </code></pre>
 <p>在这个例子中，只有当 <code>count</code> 改变时，<code>expensiveComputation</code> 函数才会被重新调用。否则，它将返回上一次计算的结果。</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><code>useMemo</code> 和 <code>useCallback</code>有什么不同？ (<a href="/2023/12/03/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84useCallback/" title="理解React中的useCallback">理解React中的useCallback</a>)<br><code>usememo</code> 是缓存一个具体的值，<code>usecallback</code> 是缓存一个函数</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><code>useMemo</code> 和 <code>useCallback</code>有什么不同？ (<a href="/2023/12/04/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84useCallback/" title="理解React中的useCallback">理解React中的useCallback</a>)<br><code>usememo</code> 是缓存一个具体的值，<code>usecallback</code> 是缓存一个函数</p>
 <p>在哪些情况下不应该使用 <code>useMemo</code>,而哪些情况应该使用呢？<br><strong>不应使用 <code>useMemo</code> 的情况</strong>:</p>
 <ul>
 <li><strong>计算不复杂</strong>: 当计算代价不大，即使在每次渲染时重复进行也不会显著影响性能时，使用 <code>useMemo</code> 可能是过度优化。</li>
@@ -219,9 +219,14 @@ export default MyComponent;
                     <div class="footer">
     
         <span> 
-            © 1949-2023 China 
+             
 
             
+                
+
+            
+                
+                    / <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"> 本网站由又拍云提供cdn加速/云存储服务 </a>
                 
 
             

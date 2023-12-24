@@ -3,7 +3,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
-    <meta name="description" content="MP4文件结构" />
+    <meta name="description" content="理解React中的useCallback" />
     <meta name="hexo-theme-A4" content="v1.7.9" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>云天游的博客</title>
@@ -109,7 +109,7 @@
 
     
         <div class="post-main-title">
-            MP4文件结构
+            理解React中的useCallback
         </div>
       
     
@@ -117,34 +117,51 @@
     <div class="post-md">
         
             
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MP4%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E6%A6%82%E8%A7%88"><span class="post-toc-text">MP4文件结构概览</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%BB%E8%A6%81%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="post-toc-text">主要组成部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%AF%8F%E4%B8%AA%E7%9B%92%E5%AD%90%E7%9A%84%E7%BB%93%E6%9E%84"><span class="post-toc-text">每个盒子的结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%B1%BB%E6%AF%94"><span class="post-toc-text">类比</span></a></li></ol></li></ol>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#useCallback-%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="post-toc-text">useCallback 的技术细节</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9A"><span class="post-toc-text">如何工作：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="post-toc-text">示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%9D%E8%80%83"><span class="post-toc-text">思考</span></a></li></ol>
             
         
-        <h2 id="MP4文件结构概览"><a href="#MP4文件结构概览" class="headerlink" title="MP4文件结构概览"></a>MP4文件结构概览</h2><p>MP4文件是一种数字多媒体容器格式，用于存储视频、音频以及其他数据，如字幕和静态图片。它基于ISO基础媒体文件格式（ISO&#x2F;IEC 14496-12），它本身是由QuickTime文件格式发展而来。</p>
-<h3 id="主要组成部分"><a href="#主要组成部分" class="headerlink" title="主要组成部分"></a>主要组成部分</h3><ol>
-<li>盒子（Boxes）: MP4文件由多个盒子（也称作原子或者段）构成，每个盒子有特定的功能和结构。</li>
-<li>MOOV盒子: 包含了媒体文件的元数据，例如视频的时长、格式、分辨率等。<br> mvhd（电影头盒子）: 包含整个文件的总体信息，如创建时间和持续时间。<br> trak（轨道盒子）: 一个MP4文件可以包含多个轨道盒子，每个轨道盒子代表一个独立的媒体流（视频、音频或其他）。<br> mdia（媒体盒子）: 在每个trak内部，包含此轨道的媒体信息。</li>
-<li>MDAT盒子: 实际存储媒体数据，如视频和音频流。</li>
-<li>其他盒子: 包括用于存储版权信息、轨道信息、用户数据等的盒子。</li>
-</ol>
-<h3 id="每个盒子的结构"><a href="#每个盒子的结构" class="headerlink" title="每个盒子的结构"></a>每个盒子的结构</h3><ol>
-<li>大小: 表示盒子的总长度，包括头部和内容。</li>
-<li>类型: 标识盒子的类型，如moov、mdat等。</li>
-<li>内容: 盒子特定的数据。</li>
-</ol>
-<h3 id="类比"><a href="#类比" class="headerlink" title="类比"></a>类比</h3><p>可以将MP4文件比作一个书架：</p>
+        <h3 id="useCallback-的技术细节"><a href="#useCallback-的技术细节" class="headerlink" title="useCallback 的技术细节"></a><code>useCallback</code> 的技术细节</h3><p>在 React 中，<code>useCallback</code> 是一个钩子，用于在组件重新渲染时保持函数的相同引用。这样做有两个主要好处： ^a71744</p>
 <ol>
-<li>书架: 整个MP4文件。</li>
-<li>书: 各种盒子，每本书都有特定的内容和作用。</li>
-<li>章节: 盒子中的不同部分，如moov盒子中关于视频的章节。</li>
+<li><strong>性能优化</strong>：避免不必要的渲染，因为依赖项数组没有改变时，函数引用保持不变。</li>
+<li><strong>避免副作用</strong>：在依赖特定引用的场景中，如 <code>useEffect</code>，<code>useCallback</code> 可以防止由于函数引用变化导致的无意中的副作用触发。</li>
 </ol>
+<h4 id="如何工作："><a href="#如何工作：" class="headerlink" title="如何工作："></a>如何工作：</h4><ul>
+<li><code>useCallback(fn, deps)</code> 接受一个函数 <code>fn</code> 和一个依赖项数组 <code>deps</code>。</li>
+<li>当组件渲染时，如果 <code>deps</code> 中的任何依赖项发生变化，它将返回一个新的函数实例；否则，返回之前的函数实例。</li>
+<li>当 <code>useCallback</code> 的依赖数组为空数组时，意味着该回调函数在组件的整个生命周期内将保持不变，只在组件首次渲染时创建一次。</li>
+</ul>
+<p>想象你有一本食谱（函数）来做你最喜欢的菜。如果食材（依赖项）没有变，你不需要重新写一本食谱书；你只需使用上次的那本。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>假设我们有一个组件，其中包含一个按钮。每当点击按钮时，我们希望触发一个特定的动作（函数）。我们希望确保这个动作（函数）在组件重新渲染时不会改变其引用，除非依赖项发生变化。</p>
+<pre><code class="tsx">import React, &#123; useCallback, useState &#125; from &#39;react&#39;;
+
+const MyComponent = () =&gt; &#123;
+  const [count, setCount] = useState(0);
+
+  // 使用useCallback确保在count不变时，increment函数引用保持不变
+  const increment = useCallback(() =&gt; &#123;
+    setCount(c =&gt; c + 1);
+  &#125;, [count]); // 依赖项是count
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;&#123;count&#125;&lt;/p&gt;
+      &lt;button onClick=&#123;increment&#125;&gt;增加&lt;/button&gt;
+    &lt;/div&gt;
+  );
+&#125;;
+
+export default MyComponent;
+</code></pre>
+<p>在这个例子中，每当 <code>count</code> 变化时，<code>increment</code> 函数将被重新创建。如果 <code>count</code> 保持不变，即使组件<strong>重新渲染</strong>，<code>increment</code> 函数的引用也<strong>保持不变</strong>。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>假设你有一个接收函数作为 <code>props</code> 的子组件。如果父组件在每次渲染时都传递一个新的函数实例，子组件将不必要地重新渲染，即使它的其他 <code>props</code> 没有变化。在这种情况下，<code>useCallback</code> 在父组件中非常有用，因为它可以保证只有在真正需要时，函数 <code>props</code> 才会变化。</p>
+<p>在哪些情况下使用 <code>useCallback</code> 并不会带来明显的性能提升？<br>当一个组件不会频繁地重新渲染，或者重新渲染的成本相对较低时，使用 <code>useCallback</code> 并不会带来明显的性能提升。实际上，滥用 <code>useCallback</code> 可能会适得其反，因为它本身也有一定的性能开销。</p>
 
     </div>
 
     <div class="post-meta">
         <i>
         
-            <span>2023-12-23</span>
+            <span>2023-12-04</span>
             
                 <span>该篇文章被 ling</span>
             
@@ -152,8 +169,12 @@
                 <span>打上标签:
                     
                     
-                        <a href='/tags/video/'>
-                            video
+                        <a href='/tags/React/'>
+                            React
+                        </a>
+                    
+                        <a href='/tags/useCallback/'>
+                            useCallback
                         </a>
                     
                 </span>
@@ -162,8 +183,8 @@
                 <span>归为分类:
                     
                     
-                        <a href='/categories/%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/'>
-                            视频开发
+                        <a href='/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/'>
+                            前端开发
                         </a>
                     
                 </span>
@@ -185,9 +206,14 @@
                     <div class="footer">
     
         <span> 
-            © 1949-2023 China 
+             
 
             
+                
+
+            
+                
+                    / <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"> 本网站由又拍云提供cdn加速/云存储服务 </a>
                 
 
             
