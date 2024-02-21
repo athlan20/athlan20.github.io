@@ -18,7 +18,7 @@ p
 
 body
 {
-    font-family: "Times New Roman", Helvetica, Tahoma, Arial, "notoserifsc-medium", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+    font-family: "Times New Roman", Helvetica, Tahoma, Arial, "LXGW WenKai", "notoserifsc-medium", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
     font-size: 16.8px;
     line-height: 1.7;
     /* letter-spacing: 0.6px; */
@@ -26,6 +26,9 @@ body
     background: #e4e4e4;
     height: 100%;
 }
+
+
+
 a
 {
     text-decoration: none;
@@ -63,7 +66,7 @@ a
 .index-header-line
 {
     margin-top: -28px;
-    margin-bottom: 18px;
+    /* margin-bottom: 18px; */
     /* border-bottom: 1px solid var(--line-1); */
     font-size: 0.6rem;
     color: var(--font-color-3);
