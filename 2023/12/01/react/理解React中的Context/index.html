@@ -11,7 +11,7 @@
 
     
         
-<link rel="stylesheet" href="/css/a11y-dark.min.css">
+<link rel="stylesheet" href="/css/highlight/style1.css">
 
         
 <link rel="stylesheet" href="/css/reset.css">
@@ -49,8 +49,11 @@
         
     
     
+    <link href="
+https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
+" rel="stylesheet">
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.1.1"></head>
     
     
     <body>
@@ -66,6 +69,8 @@
             
                 <div class="shadow-drop-2-bottom paper-main">
                     
+
+
 <div class="header">
     <div class="header-container">
         <img style="
@@ -123,7 +128,7 @@
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#React-Context-API-%E7%AE%80%E4%BB%8B"><span class="post-toc-text">React Context API 简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8-Context-API-%E4%B8%BB%E8%A6%81%E6%B6%89%E5%8F%8A%E4%B8%89%E4%B8%AA%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="post-toc-text">使用 Context API 主要涉及三个步骤：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%BB%E9%A2%98%E5%88%87%E6%8D%A2%E5%99%A8"><span class="post-toc-text">示例：创建一个主题切换器</span></a></li></ol>
             
         
-        <h3 id="React-Context-API-简介"><a href="#React-Context-API-简介" class="headerlink" title="React Context API 简介"></a>React Context API 简介</h3><p>React 的 Context API 允许您在组件树中传递数据，而无需通过每个层级手动传递 props。这对于共享那些对于许多组件来说是“全局”的数据（如主题、用户信息等）特别有用。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css" /><div class=".article-gallery"><h3 id="React-Context-API-简介"><a href="#React-Context-API-简介" class="headerlink" title="React Context API 简介"></a>React Context API 简介</h3><p>React 的 Context API 允许您在组件树中传递数据，而无需通过每个层级手动传递 props。这对于共享那些对于许多组件来说是“全局”的数据（如主题、用户信息等）特别有用。</p>
 <h4 id="使用-Context-API-主要涉及三个步骤："><a href="#使用-Context-API-主要涉及三个步骤：" class="headerlink" title="使用 Context API 主要涉及三个步骤："></a>使用 Context API 主要涉及三个步骤：</h4><ol>
 <li><strong>创建 Context：</strong> 使用 <code>React.createContext()</code> 创建一个新的 Context 对象。</li>
 <li><strong>提供 Context 值：</strong> 使用 <code>Context.Provider</code> 组件包裹组件树的一部分，并通过 <code>value</code> 属性传递数据。</li>
@@ -132,84 +137,29 @@
 </ol>
 <h3 id="示例：创建一个主题切换器"><a href="#示例：创建一个主题切换器" class="headerlink" title="示例：创建一个主题切换器"></a>示例：创建一个主题切换器</h3><p>假设我们要创建一个允许用户在“亮”和“暗”主题之间切换的应用程序。</p>
 <ol>
-<li><strong>创建 Context：</strong></li>
+<li><p><strong>创建 Context：</strong></p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; createContext, useState, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">ThemeContextType</span> &#123;</span><br><span class="line">  <span class="attr">theme</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">toggleTheme</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ThemeContext</span> = createContext&lt;<span class="title class_">ThemeContextType</span> | <span class="literal">undefined</span>&gt;(<span class="literal">undefined</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>提供 Context 值：</strong>( **需要特别关注toggleTheme和setTheme的写法和关系 )</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">ThemeProvider</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">(<span class="params">&#123; children &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [theme, setTheme] = <span class="title function_">useState</span>(<span class="string">&#x27;light&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">toggleTheme</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setTheme</span>(theme === <span class="string">&#x27;light&#x27;</span> ? <span class="string">&#x27;dark&#x27;</span> : <span class="string">&#x27;light&#x27;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ThemeContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;&#123;</span> <span class="attr">theme</span>, <span class="attr">toggleTheme</span> &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ThemeContext.Provider</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>消费 Context 值：</strong></p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">ThemeSwitcher</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> themeContext = <span class="title function_">useContext</span>(<span class="title class_">ThemeContext</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!themeContext) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;ThemeSwitcher must be used within a ThemeProvider&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;themeContext.toggleTheme&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      Switch to &#123;themeContext.theme === &#x27;light&#x27; ? &#x27;Dark&#x27; : &#x27;Light&#x27;&#125; Theme</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>副作用 Context 值：</strong> </p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 这里是您想要执行的副作用</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`The current theme is: <span class="subst">$&#123;themeContext.theme&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 清理工作（如果有的话）</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Cleaning up for theme: <span class="subst">$&#123;themeContext.theme&#125;</span>`</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">  &#125;, [themeContext.<span class="property">theme</span>]); <span class="comment">// 仅在 themeContext.theme 更改时运行</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在应用中使用：</strong></p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">App</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">ThemeProvider</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome to the Theme Switcher App<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">ThemeSwitcher</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ThemeProvider</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
-<pre><code class="tsx">import React, &#123; createContext, useState, useContext &#125; from &#39;react&#39;;
-
-interface ThemeContextType &#123;
-  theme: string;
-  toggleTheme: () =&gt; void;
-&#125;
-
-const ThemeContext = createContext&lt;ThemeContextType | undefined&gt;(undefined);
-</code></pre>
-<ol start="2">
-<li><strong>提供 Context 值：</strong>( **需要特别关注toggleTheme和setTheme的写法和关系 )</li>
-</ol>
-<pre><code class="tsx">const ThemeProvider: React.FC = (&#123; children &#125;) =&gt; &#123;
-  const [theme, setTheme] = useState(&#39;light&#39;);
-
-  const toggleTheme = () =&gt; &#123;
-    setTheme(theme === &#39;light&#39; ? &#39;dark&#39; : &#39;light&#39;);
-  &#125;;
-
-  return (
-    &lt;ThemeContext.Provider value=&#123;&#123; theme, toggleTheme &#125;&#125;&gt;
-      &#123;children&#125;
-    &lt;/ThemeContext.Provider&gt;
-  );
-&#125;;
-</code></pre>
-<ol start="3">
-<li><strong>消费 Context 值：</strong></li>
-</ol>
-<pre><code class="tsx">const ThemeSwitcher: React.FC = () =&gt; &#123;
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) &#123;
-    throw new Error(&#39;ThemeSwitcher must be used within a ThemeProvider&#39;);
-  &#125;
-
-  return (
-    &lt;button onClick=&#123;themeContext.toggleTheme&#125;&gt;
-      Switch to &#123;themeContext.theme === &#39;light&#39; ? &#39;Dark&#39; : &#39;Light&#39;&#125; Theme
-    &lt;/button&gt;
-  );
-&#125;;
-</code></pre>
-<ol start="4">
-<li><strong>副作用 Context 值：</strong></li>
-</ol>
-<pre><code class="tsx">  useEffect(() =&gt; &#123;
-    // 这里是您想要执行的副作用
-    console.log(`The current theme is: $&#123;themeContext.theme&#125;`);
-
-    return () =&gt; &#123;
-
-      // 清理工作（如果有的话）
-      console.log(`Cleaning up for theme: $&#123;themeContext.theme&#125;`);
-    &#125;;
-
-  &#125;, [themeContext.theme]); // 仅在 themeContext.theme 更改时运行
-</code></pre>
-<ol start="5">
-<li><strong>在应用中使用：</strong></li>
-</ol>
-<pre><code class="tsx">const App: React.FC = () =&gt; &#123;
-  return (
-    &lt;ThemeProvider&gt;
-      &lt;div&gt;
-        &lt;h1&gt;Welcome to the Theme Switcher App&lt;/h1&gt;
-        &lt;ThemeSwitcher /&gt;
-      &lt;/div&gt;
-    &lt;/ThemeProvider&gt;
-  );
-&#125;;
-</code></pre>
 <p><a target="_blank" rel="noopener" href="https://playcode.io/1681725">以上代码playground</a></p>
 <p>在这个例子中，我们创建了一个 <code>ThemeContext</code> 来存储当前主题和一个方法来切换主题。<code>ThemeProvider</code> 组件提供了这个上下文的值，而 <code>ThemeSwitcher</code> 组件消费这个值来渲染一个按钮，允许用户切换主题。</p>
 <p>这只是一个基本的例子，但它展示了如何在 TypeScript 中使用 React Context API。您可以根据需要扩展和修改这个模式，以适应更复杂的应用程序需求。</p>
-
+</div><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
     </div>
 
     <div class="post-meta">
@@ -319,15 +269,15 @@ const ThemeContext = createContext&lt;ThemeContextType | undefined&gt;(undefined
 
     
 
-    
 
 
 
-<script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-</script>
 
+
+
+<script src="
+https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
+"></script>
 
 
                 </div>

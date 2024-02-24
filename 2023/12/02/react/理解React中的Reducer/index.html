@@ -11,7 +11,7 @@
 
     
         
-<link rel="stylesheet" href="/css/a11y-dark.min.css">
+<link rel="stylesheet" href="/css/highlight/style1.css">
 
         
 <link rel="stylesheet" href="/css/reset.css">
@@ -49,8 +49,11 @@
         
     
     
+    <link href="
+https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
+" rel="stylesheet">
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.1.1"></head>
     
     
     <body>
@@ -66,6 +69,8 @@
             
                 <div class="shadow-drop-2-bottom paper-main">
                     
+
+
 <div class="header">
     <div class="header-container">
         <img style="
@@ -123,40 +128,12 @@
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="post-toc-text">示例代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8"><span class="post-toc-text">进阶使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Reducer%E7%BB%84%E5%90%88"><span class="post-toc-text">Reducer组合</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8Context-API%E5%92%8CuseReducer%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%80%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="post-toc-text">使用Context API和useReducer实现全局状态管理</span></a></li></ol>
             
         
-        <p><strong>Reducer的定义</strong>：在React中，一个Reducer是一个函数，它接收当前状态和一个动作（action），然后返回一个新的状态。这个概念来源于函数式编程，特别是在Flux架构模式中的使用。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css" /><div class=".article-gallery"><p><strong>Reducer的定义</strong>：在React中，一个Reducer是一个函数，它接收当前状态和一个动作（action），然后返回一个新的状态。这个概念来源于函数式编程，特别是在Flux架构模式中的使用。</p>
 <p><strong>工作方式</strong>：Reducer函数通常用于管理应用的状态。在一个简单的购物车应用中，比如，Reducer可能会处理添加商品到购物车、移除商品或清空购物车的动作。</p>
 <p><strong>纯函数</strong>：Reducer必须是纯函数，意味着给定相同的输入，它总是返回相同的输出，并且不产生副作用。</p>
 <p><strong>使用场景</strong>：在React的上下文中，Reducer经常与<code>useReducer</code>钩子结合使用，为组件提供更复杂的状态逻辑管理，或者与Redux等状态管理库结合使用。</p>
 <h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>下面是一个使用<code>counterReducer</code>的React组件示例：</p>
-<pre><code class="tsx">import React, &#123; useReducer &#125; from &#39;react&#39;;
-
-type Action = &#123; type: &#39;increment&#39; &#125; | &#123; type: &#39;decrement&#39; &#125;;
-
-function counterReducer(state: number, action: Action): number &#123;
-    switch (action.type) &#123;
-        case &#39;increment&#39;:
-            return state + 1;
-        case &#39;decrement&#39;:
-            return state - 1;
-        default:
-            return state;
-    &#125;
-&#125;
-
-const CounterComponent = () =&gt; &#123;
-    const [count, dispatch] = useReducer(counterReducer, 0);
-
-    return (
-        &lt;div&gt;
-            &lt;p&gt;Count: &#123;count&#125;&lt;/p&gt;
-            &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &#39;increment&#39; &#125;)&#125;&gt;Increment&lt;/button&gt;
-            &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &#39;decrement&#39; &#125;)&#125;&gt;Decrement&lt;/button&gt;
-        &lt;/div&gt;
-    );
-&#125;;
-
-export default CounterComponent;
-</code></pre>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useReducer &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Action</span> = &#123; <span class="attr">type</span>: <span class="string">&#x27;increment&#x27;</span> &#125; | &#123; <span class="attr">type</span>: <span class="string">&#x27;decrement&#x27;</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">counterReducer</span>(<span class="params">state: <span class="built_in">number</span>, action: Action</span>): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.<span class="property">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;increment&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> state + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;decrement&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> state - <span class="number">1</span>;</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">CounterComponent</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [count, dispatch] = <span class="title function_">useReducer</span>(counterReducer, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Count: &#123;count&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> dispatch(&#123; type: &#x27;increment&#x27; &#125;)&#125;&gt;Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> dispatch(&#123; type: &#x27;decrement&#x27; &#125;)&#125;&gt;Decrement<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">CounterComponent</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>在这个组件中：</p>
 <ul>
 <li>我们通过调用<code>useReducer</code>，将<code>counterReducer</code>和初始状态<code>0</code>传入。</li>
@@ -169,7 +146,12 @@ export default CounterComponent;
 <ol start="3">
 <li><h3 id="使用Context-API和useReducer实现全局状态管理"><a href="#使用Context-API和useReducer实现全局状态管理" class="headerlink" title="使用Context API和useReducer实现全局状态管理"></a>使用Context API和useReducer实现全局状态管理</h3></li>
 </ol>
-
+</div><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
     </div>
 
     <div class="post-meta">
@@ -279,15 +261,15 @@ export default CounterComponent;
 
     
 
-    
 
 
 
-<script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-</script>
 
+
+
+<script src="
+https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
+"></script>
 
 
                 </div>

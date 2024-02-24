@@ -11,7 +11,7 @@
 
     
         
-<link rel="stylesheet" href="/css/a11y-dark.min.css">
+<link rel="stylesheet" href="/css/highlight/style1.css">
 
         
 <link rel="stylesheet" href="/css/reset.css">
@@ -49,8 +49,11 @@
         
     
     
+    <link href="
+https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
+" rel="stylesheet">
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.1.1"></head>
     
     
     <body>
@@ -66,6 +69,8 @@
             
                 <div class="shadow-drop-2-bottom paper-main">
                     
+
+
 <div class="header">
     <div class="header-container">
         <img style="
@@ -123,43 +128,29 @@
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#createRef%EF%BC%9A%E7%B1%BB%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8"><span class="post-toc-text">createRef：类组件中的引用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#useRef%EF%BC%9A%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E7%9A%84Hook"><span class="post-toc-text">useRef：函数组件的Hook</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-1"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#forwardRef%EF%BC%9A%E4%BC%A0%E9%80%92Refs"><span class="post-toc-text">forwardRef：传递Refs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-2"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li></ol>
             
         
-        <p><strong>Ref的定义</strong>：在React的世界里，<code>refs</code>是一种特殊的属性，它允许我们直接访问DOM节点或React元素。在实际应用中，我们可能需要直接操作DOM、管理焦点、触发动画或集成第三方DOM库，这时<code>refs</code>就显得尤为重要。本文将深入探讨React中几种不同类型的<code>ref</code>，帮助你更好地理解和使用它们。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css" /><div class=".article-gallery"><p><strong>Ref的定义</strong>：在React的世界里，<code>refs</code>是一种特殊的属性，它允许我们直接访问DOM节点或React元素。在实际应用中，我们可能需要直接操作DOM、管理焦点、触发动画或集成第三方DOM库，这时<code>refs</code>就显得尤为重要。本文将深入探讨React中几种不同类型的<code>ref</code>，帮助你更好地理解和使用它们。</p>
 <h2 id="createRef：类组件中的引用"><a href="#createRef：类组件中的引用" class="headerlink" title="createRef：类组件中的引用"></a>createRef：类组件中的引用</h2><p><code>createRef</code>是React中最常用的<code>ref</code>类型。主要用于类组件，它可以帮助我们获取DOM元素或类实例的直接引用。</p>
 <h3 id="示例用法"><a href="#示例用法" class="headerlink" title="示例用法"></a>示例用法</h3><p>在类组件中，你可以通过以下方式创建并使用<code>createRef</code>：</p>
-<pre><code class="tsx">class MyComponent extends React.Component &#123;
-  constructor(props) &#123;
-    super(props);
-    this.myRef = React.createRef();
-  &#125;
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyComponent</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">myRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.myRef&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  render() &#123;
-    return &lt;div ref=&#123;this.myRef&#125;&gt;&lt;/div&gt;;
-  &#125;
-&#125;
-</code></pre>
 <p>通过<code>this.myRef.current</code>，我们可以直接访问绑定到<code>&lt;div&gt;</code>元素的引用。</p>
 <h2 id="useRef：函数组件的Hook"><a href="#useRef：函数组件的Hook" class="headerlink" title="useRef：函数组件的Hook"></a>useRef：函数组件的Hook</h2><p>在函数组件中，<code>useRef</code>是一个非常有用的Hook。它的行为与<code>createRef</code>类似，但在组件的整个生命周期内保持不变。</p>
 <h3 id="示例用法-1"><a href="#示例用法-1" class="headerlink" title="示例用法"></a>示例用法</h3><p>在函数组件中，<code>useRef</code>可以这样使用：</p>
-<pre><code class="tsx">function MyFunctionalComponent() &#123;
-  const myRef = useRef(null);
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyFunctionalComponent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> myRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;myRef&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-  return &lt;div ref=&#123;myRef&#125;&gt;&lt;/div&gt;;
-&#125;
-</code></pre>
 <p>这里<code>myRef.current</code>同样指向绑定的DOM元素。</p>
 <h2 id="forwardRef：传递Refs"><a href="#forwardRef：传递Refs" class="headerlink" title="forwardRef：传递Refs"></a>forwardRef：传递Refs</h2><p><code>forwardRef</code>是React提供的一个方法，用于在组件树中自动传递refs。这在高阶组件或需要将refs传递给子组件的场景中非常有用。</p>
 <h3 id="示例用法-2"><a href="#示例用法-2" class="headerlink" title="示例用法"></a>示例用法</h3><p>使用<code>forwardRef</code>，我们可以创建一个能够接收ref的组件：</p>
-<pre><code class="tsx">const FancyButton = React.forwardRef((props, ref) =&gt; (
-  &lt;button ref=&#123;ref&#125; &#123;...props&#125;&gt;&lt;/button&gt;
-));
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">FancyButton</span> = <span class="title class_">React</span>.<span class="title function_">forwardRef</span>(<span class="function">(<span class="params">props, ref</span>) =&gt;</span> (</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">ref</span>=<span class="string">&#123;ref&#125;</span> &#123;<span class="attr">...props</span>&#125;&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件中</span></span><br><span class="line"><span class="keyword">const</span> ref = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">FancyButton</span> <span class="attr">ref</span>=<span class="string">&#123;ref&#125;</span> /&gt;</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-// 父组件中
-const ref = React.createRef();
-&lt;FancyButton ref=&#123;ref&#125; /&gt;;
-</code></pre>
 <p>这样父组件就可以直接获取到<code>FancyButton</code>组件的DOM引用。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>理解React中的不同类型<code>ref</code>及其用法，对于高效地管理DOM元素和React组件至关重要。无论是类组件还是函数组件，正确地使用<code>refs</code>都可以极大地提高应用的灵活性和效率。</p>
-
+</div><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
     </div>
 
     <div class="post-meta">
@@ -277,15 +268,15 @@ const ref = React.createRef();
 
     
 
-    
 
 
 
-<script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-</script>
 
+
+
+<script src="
+https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
+"></script>
 
 
                 </div>
