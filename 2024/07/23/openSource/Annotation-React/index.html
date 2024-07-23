@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="轻松实现文本标注：介绍 Annotation-React 库" />
+    <meta name="hexo-theme-A4" content="v1.9.1" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <title>云天游的博客</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+    
+    
+    
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '53px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
+        
+            <div class="left-toc-container">
+                <nav id="toc" class="bs-docs-sidebar"></nav>
+            </div>
+        
+        <div class="paper">
+            
+            
+            
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <img style="
+        width: 56px;
+        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <div class="header-content">
+            <a class="logo" href="/">云天游的博客</a> 
+            <span class="description"></span> 
+        </div>
+        
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页</a></li>
+            
+        
+            
+                <li><a href="/list/">文章</a></li>
+            
+        
+            
+                <li><a href="/tags/">标签</a></li>
+            
+        
+            
+                <li><a href="/categories/">分类</a></li>
+            
+        
+    </ul>
+</div> 
+        
+                    
+                    
+
+                    
+                    
+                    
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+
+    
+        <div class="post-main-title">
+            轻松实现文本标注：介绍 Annotation-React 库
+        </div>
+      
+    
+
+    <div class="post-md">
+        
+            
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="post-toc-text">快速开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="post-toc-text">使用示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="post-toc-text">参数说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9B%B4%E5%A4%9A%E5%8F%82%E6%95%B0"><span class="post-toc-text">更多参数</span></a></li></ol></li></ol>
+            
+        
+        <link rel="stylesheet" type="text/css" href="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><p>文本标注功能在教育、数据分析、内容管理等领域中变得越来越重要。为了帮助开发者更轻松地实现这一功能，我写了这个 <a target="_blank" rel="noopener" href="https://github.com/athlan20/annotation-react"><code>Annotation-React</code></a> 库。这个库可以让你在 React 应用中轻松地对文章或段落中的单词或句子进行划线打标。</p>
+<p>功能目前较简单，一张gif就能演示完成如下:</p>
+<p align=center><a target="_blank" rel="noopener" href="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/83569e4fd1d249ce8f4b72508774a08b~tplv-73owjymdk6-watermark.image?policy=eyJ2bSI6MywidWlkIjoiMjQxODU4MTMwOTc1NTczNiJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1722303499&x-orig-sign=8D0HkgddDHm3JcVfWfqObH5b7OE%3D" title="347661503-2cd02c10-ef7c-47f3-b61d-173e22cee41b.gif" class="gallery-item" style="box-shadow: none;"> <img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/83569e4fd1d249ce8f4b72508774a08b~tplv-73owjymdk6-watermark.image?policy=eyJ2bSI6MywidWlkIjoiMjQxODU4MTMwOTc1NTczNiJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1722303499&x-orig-sign=8D0HkgddDHm3JcVfWfqObH5b7OE%3D" alt="347661503-2cd02c10-ef7c-47f3-b61d-173e22cee41b.gif"  /></a></p>
+
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先，你需要通过 npm 或 yarn 安装 <code>Annotation-React</code> 库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install annotation-react</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add annotation-react</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>以下是一个简单的使用示例，展示了如何在 React 应用中使用 <code>Annotation-React</code> 库对文本进行标注。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Annotation</span> &#125; <span class="keyword">from</span> <span class="string">&quot;annotation-react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createRoot &#125; <span class="keyword">from</span> <span class="string">&quot;react-dom/client&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;annotation-react/dist/style.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;app&quot;</span>)!).<span class="title function_">render</span>(</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">Annotation</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">onChange</span>=<span class="string">&#123;(annos)</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">      console.log(&#123; annos &#125;);</span></span><br><span class="line"><span class="language-xml">    &#125;&#125;</span></span><br><span class="line"><span class="language-xml">    tags=&#123;[&#123; content: &quot;error&quot; &#125;, &#123; content: &quot;success&quot; &#125;]&#125;</span></span><br><span class="line"><span class="language-xml">    sentence=&quot;A story is a component with a set of arguments that define how the component should render.&quot;</span></span><br><span class="line"><span class="language-xml">  /&gt;</span></span><br><span class="line">);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><code>sentence</code>：需要进行标注的文本内容。</li>
+<li><code>onChange</code>：标注完成后的回调函数，返回当前所有标注结果。</li>
+<li><code>tags</code>：自定义打标内容。</li>
+</ul>
+<h3 id="更多参数"><a href="#更多参数" class="headerlink" title="更多参数"></a>更多参数</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">PAnnotation</span> &#123;</span><br><span class="line">    <span class="comment">/** content to be showed */</span></span><br><span class="line">    sentence?: <span class="built_in">string</span>;</span><br><span class="line">    tags?: <span class="title class_">TTag</span>[];</span><br><span class="line">    <span class="comment">/**the annotations that already exist */</span></span><br><span class="line">    annoations?: <span class="title class_">TAnnoDetail</span>[];</span><br><span class="line">    <span class="comment">/**the fontSize of main content,now only support number, will use px unit */</span></span><br><span class="line">    fontSize?: <span class="built_in">number</span>;</span><br><span class="line">    <span class="comment">/** Ensure that there is enough space between the rows to fit a tag */</span></span><br><span class="line">    lineHeight?: <span class="built_in">string</span>;</span><br><span class="line">    <span class="comment">/** the color of marked text by annotation */</span></span><br><span class="line">    hightlightColor?: <span class="built_in">string</span>;</span><br><span class="line">    hightlightBgColor?: <span class="built_in">string</span>;</span><br><span class="line">    <span class="comment">/** can not mark */</span></span><br><span class="line">    <span class="keyword">readonly</span>?: <span class="built_in">boolean</span>;</span><br><span class="line">    <span class="comment">/** notify when annotations add or remove */</span></span><br><span class="line">    onChange?: <span class="function">(<span class="params">annoations: TAnnoDetail[]</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目前项目刚发布第一个版本，有不足的地方希望大家多提pr</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/athlan20/annotation-react">项目git地址</a></p>
+</div><script src="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
+        var options1 = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
+        }</script>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2024-07-23</span>
+            
+                <span>该篇文章被 ling</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/React/'>
+                            React
+                        </a>
+                    
+                        <a href='/tags/Typescript/'>
+                            Typescript
+                        </a>
+                    
+                        <a href='/tags/%E6%89%93%E6%A0%87/'>
+                            打标
+                        </a>
+                    
+                        <a href='/tags/%E6%A0%87%E8%AE%B0/'>
+                            标记
+                        </a>
+                    
+                        <a href='/tags/%E6%95%B0%E6%8D%AE%E6%A0%87%E8%AE%B0/'>
+                            数据标记
+                        </a>
+                    
+                        <a href='/tags/annotation/'>
+                            annotation
+                        </a>
+                    
+                        <a href='/tags/mark/'>
+                            mark
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/'>
+                            前端开发
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    <!-- <div class="post-footer-pre-next">
+        <span>上一篇：<a href=""></a></span>
+        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
+    </div> -->
+
+    
+        
+
+     
+</div>
+
+
+
+                                      
+                    
+                    
+                    <div class="footer">
+    
+        <span> 
+             
+
+            
+                
+
+            
+                
+                    / <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"> 本网站由又拍云提供cdn加速/云存储服务 </a>
+                
+
+            
+        </span>
+    
+</div>
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊看过大海的人不会忘记海的广阔🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery.min.js"></script>
+
+
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->  
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>

@@ -3,9 +3,9 @@
     
     <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="机器学习中的Embedding:你需要了解的一切" />
-    <meta name="hexo-theme-A4" content="v1.8.3" />
+    <meta name="hexo-theme-A4" content="v1.9.1" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>云天游的博客</title>
 
@@ -48,15 +48,55 @@
 
         
     
+
     
-    <link href="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
-" rel="stylesheet">
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+
 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
+
+    
+    
+
+
+
+    
+
+    
+    
+
+    
+    
+    
     <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '53px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
         
             <div class="left-toc-container">
                 <nav id="toc" class="bs-docs-sidebar"></nav>
@@ -128,7 +168,7 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#One-Hot-Encoding"><span class="post-toc-text">One-Hot Encoding</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SVD"><span class="post-toc-text">SVD</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#BERT"><span class="post-toc-text">BERT</span></a></li></ol>
             
         
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css" /><div class=".article-gallery"><p>Embedding已经普及到数据科学家的工具箱中，并极大地改变了自然语言处理、计算机视觉和推荐系统的工作方式。然而，许多数据科学家认为它们过时且令人困惑。更多的人在不了解它们是什么的情况下盲目使用它们。在本文中，我们将深入探讨Embedding是什么，它们如何工作，以及它们在实际系统中如何运作。</p>
+        <link rel="stylesheet" type="text/css" href="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><p>Embedding已经普及到数据科学家的工具箱中，并极大地改变了自然语言处理、计算机视觉和推荐系统的工作方式。然而，许多数据科学家认为它们过时且令人困惑。更多的人在不了解它们是什么的情况下盲目使用它们。在本文中，我们将深入探讨Embedding是什么，它们如何工作，以及它们在实际系统中如何运作。</p>
 <p><strong>什么是Embedding?</strong>  </p>
 <p>要理解Embedding，我们首先需要了解机器学习模型的基本要求。具体来说，大多数机器学习算法只能将低维数值数据作为输入。**<br>**</p>
 <p>在下面的神经网络中，每个输入特征都必须是数字。这意味着在诸如推荐系统之类的领域，我们必须将非数字变量（如项目和用户）转换为数字和向量。我们可以尝试通过产品ID来表示项目；然而，神经网络将数字输入视为连续变量。这意味着较高的数字“大于”较低的数字。它还将相似的数字视为相似的项目。对于“年龄”这样的字段来说，这是非常有道理的，但是当数字表示类别变量时，这是没有意义的。在嵌入之前，最常用的方法之一是one-hot encoding。</p>
@@ -236,11 +276,11 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 <blockquote>
 <p>原文: <a target="_blank" rel="noopener" href="https://www.featureform.com/post/the-definitive-guide-to-embeddings">https://www.featureform.com/post/the-definitive-guide-to-embeddings</a></p>
 </blockquote>
-</div><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
+</div><script src="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
+        var options1 = {
             selector: '.gallery-item'
         };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
         }</script>
     </div>
 
@@ -278,6 +318,13 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
         
         </i>
     </div>
+    <br>
+    
+    <!-- <div class="post-footer-pre-next">
+        <span>上一篇：<a href=""></a></span>
+        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
+    </div> -->
+
     
         
 
@@ -329,13 +376,6 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 <script src="/js/toc.js"></script>
 
     
-    
-    
-<script src="/js/highlight.min.js"></script>
-
-    
-<script src="/js/highlightjs-line-numbers.js"></script>
-
 
     
 <script src="/js/randomHeaderContent.js"></script>
@@ -347,15 +387,18 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 
     
 
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
 
 
 
 
 
+<script src="/js/lightgallery.min.js"></script>
 
-<script src="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
-"></script>
 
 
                 </div>
@@ -368,32 +411,13 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
                     </svg>
                 </div>
             
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
     </body>
-
-
-    <!--暗黑模式-->
-    <script src="/js/darkmode-js.min.js"></script>
-    <script>
-        function addDarkmodeWidget() {
-        const options = {
-            bottom: '53px', // default: '32px'
-            right: 'unset', // default: '32px'
-            left: '42px', // default: 'unset'
-            time: '0.3s', // default: '0.3s'
-            mixColor: '#fff', // default: '#fff'
-            backgroundColor: ' #e4e4e4 ',  // default: '#fff'
-            buttonColorDark: '#100f2c',  // default: '#100f2c'
-            buttonColorLight: '#fff', // default: '#fff'
-            saveInCookies: true, // default: true,
-            label: '🌓', // default: ''
-            autoMatchOsTheme: true // default: true
-        }
-    
-        const darkmode = new Darkmode(options);
-        darkmode.showWidget();
-        
-        }
-        window.addEventListener('load', addDarkmodeWidget);
-    </script>
-  
 </html>

@@ -3,9 +3,9 @@
     
     <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="理解React中的useMemo" />
-    <meta name="hexo-theme-A4" content="v1.8.3" />
+    <meta name="hexo-theme-A4" content="v1.9.1" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>云天游的博客</title>
 
@@ -48,15 +48,55 @@
 
         
     
+
     
-    <link href="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
-" rel="stylesheet">
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+
 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
+
+    
+    
+
+
+
+    
+
+    
+    
+
+    
+    
+    
     <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '53px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
         
             <div class="left-toc-container">
                 <nav id="toc" class="bs-docs-sidebar"></nav>
@@ -128,7 +168,7 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#useMemo-%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="post-toc-text">useMemo 的技术细节</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="post-toc-text">工作原理</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="post-toc-text">示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%9D%E8%80%83"><span class="post-toc-text">思考</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#memo%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6"><span class="post-toc-text">memo高阶组件</span></a></li></ol>
             
         
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css" /><div class=".article-gallery"><h3 id="useMemo-的技术细节"><a href="#useMemo-的技术细节" class="headerlink" title="useMemo 的技术细节"></a>useMemo 的技术细节</h3><p><code>useMemo</code> 是 React 的一个钩子，它用于对计算结果进行记忆。当你有一些计算代价较高的操作时，<code>useMemo</code> 可以帮助你避免在每次渲染时都重新计算，从而提升性能。</p>
+        <link rel="stylesheet" type="text/css" href="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><h3 id="useMemo-的技术细节"><a href="#useMemo-的技术细节" class="headerlink" title="useMemo 的技术细节"></a>useMemo 的技术细节</h3><p><code>useMemo</code> 是 React 的一个钩子，它用于对计算结果进行记忆。当你有一些计算代价较高的操作时，<code>useMemo</code> 可以帮助你避免在每次渲染时都重新计算，从而提升性能。</p>
 <h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><ul>
 <li><code>useMemo(() =&gt; computeExpensiveValue(a, b), [a, b])</code> 接受一个“创建”函数和一个依赖项数组。</li>
 <li>如果依赖项数组中的任何一个依赖项发生了变化，React 将重新调用“创建”函数来计算新的值；如果没有变化，React 将返回上一次计算的值。</li>
@@ -152,11 +192,11 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 <li><strong>提高响应性</strong>: 在渲染过程中避免执行昂贵的计算，可以使应用更加流畅和响应更快。</li>
 </ul>
 <h3 id="memo高阶组件"><a href="#memo高阶组件" class="headerlink" title="memo高阶组件"></a>memo高阶组件</h3><p>当用memo包裹组件后，每次渲染前会浅比较组件的prop是否有变化，如果有变化才做重新渲染</p>
-</div><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
+</div><script src="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
+        var options1 = {
             selector: '.gallery-item'
         };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
         }</script>
     </div>
 
@@ -198,6 +238,13 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
         
         </i>
     </div>
+    <br>
+    
+    <!-- <div class="post-footer-pre-next">
+        <span>上一篇：<a href=""></a></span>
+        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
+    </div> -->
+
     
         
 
@@ -249,13 +296,6 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 <script src="/js/toc.js"></script>
 
     
-    
-    
-<script src="/js/highlight.min.js"></script>
-
-    
-<script src="/js/highlightjs-line-numbers.js"></script>
-
 
     
 <script src="/js/randomHeaderContent.js"></script>
@@ -267,15 +307,18 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 
     
 
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
 
 
 
 
 
+<script src="/js/lightgallery.min.js"></script>
 
-<script src="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
-"></script>
 
 
                 </div>
@@ -288,32 +331,13 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
                     </svg>
                 </div>
             
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
     </body>
-
-
-    <!--暗黑模式-->
-    <script src="/js/darkmode-js.min.js"></script>
-    <script>
-        function addDarkmodeWidget() {
-        const options = {
-            bottom: '53px', // default: '32px'
-            right: 'unset', // default: '32px'
-            left: '42px', // default: 'unset'
-            time: '0.3s', // default: '0.3s'
-            mixColor: '#fff', // default: '#fff'
-            backgroundColor: ' #e4e4e4 ',  // default: '#fff'
-            buttonColorDark: '#100f2c',  // default: '#100f2c'
-            buttonColorLight: '#fff', // default: '#fff'
-            saveInCookies: true, // default: true,
-            label: '🌓', // default: ''
-            autoMatchOsTheme: true // default: true
-        }
-    
-        const darkmode = new Darkmode(options);
-        darkmode.showWidget();
-        
-        }
-        window.addEventListener('load', addDarkmodeWidget);
-    </script>
-  
 </html>

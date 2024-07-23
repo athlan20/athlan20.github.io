@@ -67,11 +67,13 @@
 }
 .post-md strong
 {
-    font-weight: 700;
+    font-weight: bold;
+    font-family: LXGW WenKai Bold;
 }
 .post-md em
 {
     font-style: italic;
+
 }
 .post-md kbd
 {

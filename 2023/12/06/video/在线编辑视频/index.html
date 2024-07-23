@@ -3,9 +3,9 @@
     
     <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="模仿capcut在线编辑视频" />
-    <meta name="hexo-theme-A4" content="v1.8.3" />
+    <meta name="hexo-theme-A4" content="v1.9.1" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>云天游的博客</title>
 
@@ -48,15 +48,55 @@
 
         
     
+
     
-    <link href="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
-" rel="stylesheet">
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+
 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
+
+    
+    
+
+
+
+    
+
+    
+    
+
+    
+    
+    
     <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '53px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
         
             <div class="left-toc-container">
                 <nav id="toc" class="bs-docs-sidebar"></nav>
@@ -128,7 +168,7 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91"><span class="post-toc-text">在线视频编辑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Timeline"><span class="post-toc-text">Timeline</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ffmpeg-Canvas"><span class="post-toc-text">ffmpeg&#x3D;&gt;Canvas</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%92%AD%E6%94%BE%E5%99%A8"><span class="post-toc-text">播放器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ffmpeg-video"><span class="post-toc-text">ffmpeg&#x3D;&gt;video</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ffmpeg-video-canvas-%EF%BC%88%E8%85%BE%E8%AE%AF%E6%99%BA%E5%BD%B1%EF%BC%89"><span class="post-toc-text">ffmpeg&#x3D;&gt;video&#x3D;&gt;canvas （腾讯智影）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%B9%E6%95%88"><span class="post-toc-text">特效</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#webgl%E5%9C%A8canvas%E4%B8%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E6%99%BA%E5%BD%B1%EF%BC%89"><span class="post-toc-text">webgl在canvas上（腾讯智影）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AF%BC%E5%87%BA"><span class="post-toc-text">导出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%88%E8%85%BE%E8%AE%AF%E6%99%BA%E5%BD%B1-%E5%89%AA%E6%98%A0%EF%BC%89"><span class="post-toc-text">服务端（腾讯智影,剪映）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93"><span class="post-toc-text">视频渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ffmpeg-wasm"><span class="post-toc-text">ffmpeg.wasm</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cutput"><span class="post-toc-text">cutput</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="post-toc-text">架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E9%A1%B9%E7%9B%AE"><span class="post-toc-text">参考项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%97%B6%E9%97%B4%E8%BD%B4%E7%9B%B8%E5%85%B3%E5%8A%9F%E8%83%BD"><span class="post-toc-text">时间轴相关功能</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%89%B9%E6%95%88-1"><span class="post-toc-text">特效</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="post-toc-text">项目</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E5%8C%96"><span class="post-toc-text">优化</span></a></li></ol></li></ol>
             
         
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css" /><div class=".article-gallery"><h1 id="在线视频编辑"><a href="#在线视频编辑" class="headerlink" title="在线视频编辑"></a>在线视频编辑</h1><h2 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h2><h4 id="ffmpeg-Canvas"><a href="#ffmpeg-Canvas" class="headerlink" title="ffmpeg&#x3D;&gt;Canvas"></a>ffmpeg&#x3D;&gt;Canvas</h4><h2 id="播放器"><a href="#播放器" class="headerlink" title="播放器"></a>播放器</h2><h3 id="ffmpeg-video"><a href="#ffmpeg-video" class="headerlink" title="ffmpeg&#x3D;&gt;video"></a>ffmpeg&#x3D;&gt;video</h3><h3 id="ffmpeg-video-canvas-（腾讯智影）"><a href="#ffmpeg-video-canvas-（腾讯智影）" class="headerlink" title="ffmpeg&#x3D;&gt;video&#x3D;&gt;canvas （腾讯智影）"></a>ffmpeg&#x3D;&gt;video&#x3D;&gt;canvas （腾讯智影）</h3><h2 id="特效"><a href="#特效" class="headerlink" title="特效"></a>特效</h2><h3 id="webgl在canvas上（腾讯智影）"><a href="#webgl在canvas上（腾讯智影）" class="headerlink" title="webgl在canvas上（腾讯智影）"></a>webgl在canvas上（腾讯智影）</h3><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><h3 id="服务端（腾讯智影-剪映）"><a href="#服务端（腾讯智影-剪映）" class="headerlink" title="服务端（腾讯智影,剪映）"></a>服务端（腾讯智影,剪映）</h3><h2 id="视频渲染"><a href="#视频渲染" class="headerlink" title="视频渲染"></a>视频渲染</h2><h3 id="ffmpeg-wasm"><a href="#ffmpeg-wasm" class="headerlink" title="ffmpeg.wasm"></a>ffmpeg.wasm</h3><p>需要服务器返回头增加<br>Cross-Origin-Embedder-Policy: require-corp<br>Cross-Origin-Opener-Policy: same-origin<br>才可以使用sharedArrayBuffer</p>
+        <link rel="stylesheet" type="text/css" href="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><h1 id="在线视频编辑"><a href="#在线视频编辑" class="headerlink" title="在线视频编辑"></a>在线视频编辑</h1><h2 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h2><h4 id="ffmpeg-Canvas"><a href="#ffmpeg-Canvas" class="headerlink" title="ffmpeg&#x3D;&gt;Canvas"></a>ffmpeg&#x3D;&gt;Canvas</h4><h2 id="播放器"><a href="#播放器" class="headerlink" title="播放器"></a>播放器</h2><h3 id="ffmpeg-video"><a href="#ffmpeg-video" class="headerlink" title="ffmpeg&#x3D;&gt;video"></a>ffmpeg&#x3D;&gt;video</h3><h3 id="ffmpeg-video-canvas-（腾讯智影）"><a href="#ffmpeg-video-canvas-（腾讯智影）" class="headerlink" title="ffmpeg&#x3D;&gt;video&#x3D;&gt;canvas （腾讯智影）"></a>ffmpeg&#x3D;&gt;video&#x3D;&gt;canvas （腾讯智影）</h3><h2 id="特效"><a href="#特效" class="headerlink" title="特效"></a>特效</h2><h3 id="webgl在canvas上（腾讯智影）"><a href="#webgl在canvas上（腾讯智影）" class="headerlink" title="webgl在canvas上（腾讯智影）"></a>webgl在canvas上（腾讯智影）</h3><h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><h3 id="服务端（腾讯智影-剪映）"><a href="#服务端（腾讯智影-剪映）" class="headerlink" title="服务端（腾讯智影,剪映）"></a>服务端（腾讯智影,剪映）</h3><h2 id="视频渲染"><a href="#视频渲染" class="headerlink" title="视频渲染"></a>视频渲染</h2><h3 id="ffmpeg-wasm"><a href="#ffmpeg-wasm" class="headerlink" title="ffmpeg.wasm"></a>ffmpeg.wasm</h3><p>需要服务器返回头增加<br>Cross-Origin-Embedder-Policy: require-corp<br>Cross-Origin-Opener-Policy: same-origin<br>才可以使用sharedArrayBuffer</p>
 <h2 id="cutput"><a href="#cutput" class="headerlink" title="cutput"></a>cutput</h2><p>cutput返回<br><a target="_blank" rel="noopener" href="https://static.yuntianyou.cn/blog/img/2023/12/20231206170352.png" title="capcut也有类似头" class="gallery-item" style="box-shadow: none;"> <img src="https://static.yuntianyou.cn/blog/img/2023/12/20231206170352.png" alt="capcut也有类似头"></a></p>
 <p>通过hook window.postMessage可以猜测视频合成是使用webworker来做</p>
 <h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>[架构参考](<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/509220013">如何用纯前端实现一个 Web 版剪映？ - 知乎 (zhihu.com)</a>)</p>
@@ -137,11 +177,11 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 <h3 id="特效-1"><a href="#特效-1" class="headerlink" title="特效"></a>特效</h3><p><a target="_blank" rel="noopener" href="https://github.com/libpag/pag-web">腾讯pag</a></p>
 <h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><p><a target="_blank" rel="noopener" href="https://keyframes.studio/editor?template=demo">render-video - npm (keyframes.studio)</a><br><a target="_blank" rel="noopener" href="https://zenvideo.qq.com/editor/zrzoi6sof1b7ams6fxhyhqn">腾讯智影</a><br><a target="_blank" rel="noopener" href="https://www.capcut.cn/home-page">剪映 (capcut.cn)</a></p>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>目前ffmpeg体积过大（如果内部用户内网，体验OK也不是大问题）<br>(自定义ffmpeg编译)[<a target="_blank" rel="noopener" href="https://juejin.cn/post/6998876488451751973]">https://juejin.cn/post/6998876488451751973]</a></p>
-</div><script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
+</div><script src="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
+        var options1 = {
             selector: '.gallery-item'
         };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
         }</script>
     </div>
 
@@ -183,6 +223,13 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
         
         </i>
     </div>
+    <br>
+    
+    <!-- <div class="post-footer-pre-next">
+        <span>上一篇：<a href=""></a></span>
+        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
+    </div> -->
+
     
         
 
@@ -234,13 +281,6 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 <script src="/js/toc.js"></script>
 
     
-    
-    
-<script src="/js/highlight.min.js"></script>
-
-    
-<script src="/js/highlightjs-line-numbers.js"></script>
-
 
     
 <script src="/js/randomHeaderContent.js"></script>
@@ -252,15 +292,18 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 
     
 
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
 
 
 
 
 
+<script src="/js/lightgallery.min.js"></script>
 
-<script src="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
-"></script>
 
 
                 </div>
@@ -273,32 +316,13 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
                     </svg>
                 </div>
             
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
     </body>
-
-
-    <!--暗黑模式-->
-    <script src="/js/darkmode-js.min.js"></script>
-    <script>
-        function addDarkmodeWidget() {
-        const options = {
-            bottom: '53px', // default: '32px'
-            right: 'unset', // default: '32px'
-            left: '42px', // default: 'unset'
-            time: '0.3s', // default: '0.3s'
-            mixColor: '#fff', // default: '#fff'
-            backgroundColor: ' #e4e4e4 ',  // default: '#fff'
-            buttonColorDark: '#100f2c',  // default: '#100f2c'
-            buttonColorLight: '#fff', // default: '#fff'
-            saveInCookies: true, // default: true,
-            label: '🌓', // default: ''
-            autoMatchOsTheme: true // default: true
-        }
-    
-        const darkmode = new Darkmode(options);
-        darkmode.showWidget();
-        
-        }
-        window.addEventListener('load', addDarkmodeWidget);
-    </script>
-  
 </html>

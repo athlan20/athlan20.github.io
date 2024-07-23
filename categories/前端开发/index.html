@@ -3,9 +3,9 @@
     
     <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  viewport-fit=cover" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="" />
-    <meta name="hexo-theme-A4" content="v1.8.3" />
+    <meta name="hexo-theme-A4" content="v1.9.1" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>云天游的博客</title>
 
@@ -48,15 +48,55 @@
 
         
     
+
     
-    <link href="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
-" rel="stylesheet">
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+
 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
+
+    
+    
+
+
+
+    
+
+    
+    
+
+    
+    
+    
     <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '53px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
         
             <div class="left-toc-container">
                 <nav id="toc" class="bs-docs-sidebar"></nav>
@@ -114,13 +154,30 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 
                     
                     
-                        <div class="archive-list">
+                        
+
+<div class="archive-list">
   <ul class="archive">
 
     
-    <span>🔖<i>前端开发</i></span>
+    <span><span class="darkmode-ignore">🔖</span><i>前端开发</i></span>
           
     
+
+    
+    
+
+    
+    
+
+  
+    
+        <li>
+          <span class="archive-date">2024/07/23</span>
+          <div class="archive-main">
+              <a class="archive-title" href="/2024/07/23/openSource/Annotation-React/">轻松实现文本标注：介绍 Annotation-React 库</a>
+          </div>
+        </li>
     
   
     
@@ -161,9 +218,18 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
   
     
         <li>
+          <span class="archive-date">2023/12/03</span>
+          <div class="archive-main">
+              <a class="archive-title" href="/2023/12/03/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Reducer/">理解React中的Reducer</a>
+          </div>
+        </li>
+    
+  
+    
+        <li>
           <span class="archive-date">2023/12/02</span>
           <div class="archive-main">
-              <a class="archive-title" href="/2023/12/02/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Reducer/">理解React中的Reducer</a>
+              <a class="archive-title" href="/2023/12/02/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Context/">理解React中的Context</a>
           </div>
         </li>
     
@@ -172,24 +238,14 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
         <li>
           <span class="archive-date">2023/12/01</span>
           <div class="archive-main">
-              <a class="archive-title" href="/2023/12/01/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Context/">理解React中的Context</a>
-          </div>
-        </li>
-    
-  
-    
-        <li>
-          <span class="archive-date">2023/11/30</span>
-          <div class="archive-main">
-              <a class="archive-title" href="/2023/11/30/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Ref/">理解React中的Ref</a>
+              <a class="archive-title" href="/2023/12/01/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Ref/">理解React中的Ref</a>
           </div>
         </li>
     
   
   </ul>
 </div>
-
-<!--  --> 
+ 
                     
                     
                     <!--说明是文章post页面-->
@@ -235,13 +291,6 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 <script src="/js/toc.js"></script>
 
     
-    
-    
-<script src="/js/highlight.min.js"></script>
-
-    
-<script src="/js/highlightjs-line-numbers.js"></script>
-
 
     
 <script src="/js/randomHeaderContent.js"></script>
@@ -253,15 +302,18 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/css/lightgallery.min.css
 
     
 
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
 
 
 
 
 
+<script src="/js/lightgallery.min.js"></script>
 
-<script src="
-https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
-"></script>
 
 
                 </div>
@@ -274,32 +326,13 @@ https://cdn.jsdelivr.net/npm/lightgallery.js@1.4.0/dist/js/lightgallery.min.js
                     </svg>
                 </div>
             
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
     </body>
-
-
-    <!--暗黑模式-->
-    <script src="/js/darkmode-js.min.js"></script>
-    <script>
-        function addDarkmodeWidget() {
-        const options = {
-            bottom: '53px', // default: '32px'
-            right: 'unset', // default: '32px'
-            left: '42px', // default: 'unset'
-            time: '0.3s', // default: '0.3s'
-            mixColor: '#fff', // default: '#fff'
-            backgroundColor: ' #e4e4e4 ',  // default: '#fff'
-            buttonColorDark: '#100f2c',  // default: '#100f2c'
-            buttonColorLight: '#fff', // default: '#fff'
-            saveInCookies: true, // default: true,
-            label: '🌓', // default: ''
-            autoMatchOsTheme: true // default: true
-        }
-    
-        const darkmode = new Darkmode(options);
-        darkmode.showWidget();
-        
-        }
-        window.addEventListener('load', addDarkmodeWidget);
-    </script>
-  
 </html>
