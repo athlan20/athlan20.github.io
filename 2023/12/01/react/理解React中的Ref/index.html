@@ -56,9 +56,15 @@
     
     
    
-<link rel="stylesheet" href="/css/lightgallery.min.css">
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
 
 
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
@@ -73,15 +79,19 @@
     
     
 
+
+
+
     
     
-    
+
+
     <body>
         <script src="/js/darkmode-js.min.js"></script>
         
         <script>
             const options = {
-                bottom: '53px', // default: '32px'
+                bottom: '40px', // default: '32px'
                 right: 'unset', // default: '32px'
                 left: '42px', // default: 'unset'
                 time: '0.3s', // default: '0.3s'
@@ -98,14 +108,16 @@
         </script>
         
         
-            <div class="left-toc-container">
-                <nav id="toc" class="bs-docs-sidebar"></nav>
-            </div>
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
         
         <div class="paper">
+
             
-            
-            
+
             
                 <div class="shadow-drop-2-bottom paper-main">
                     
@@ -113,14 +125,26 @@
 
 <div class="header">
     <div class="header-container">
-        <img style="
-        width: 56px;
-        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 0; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.webp" 
+        />
         <div class="header-content">
             <a class="logo" href="/">云天游的博客</a> 
             <span class="description"></span> 
         </div>
-        
     </div>
     
    
@@ -143,23 +167,59 @@
             
         
     </ul>
-</div> 
-        
+</div>
+
                     
                     
 
                     
                     
-                    
+
                     <!--说明是文章post页面-->
                     
                         <div class="post-main">
+    
 
     
-        <div class="post-main-title">
-            理解React中的Ref
-        </div>
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    理解React中的Ref
+                </div>
+            
+        
       
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-09-24</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：519</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：2分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
@@ -168,7 +228,7 @@
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#createRef%EF%BC%9A%E7%B1%BB%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8"><span class="post-toc-text">createRef：类组件中的引用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#useRef%EF%BC%9A%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E7%9A%84Hook"><span class="post-toc-text">useRef：函数组件的Hook</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-1"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#forwardRef%EF%BC%9A%E4%BC%A0%E9%80%92Refs"><span class="post-toc-text">forwardRef：传递Refs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%A4%BA%E4%BE%8B%E7%94%A8%E6%B3%95-2"><span class="post-toc-text">示例用法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li></ol>
             
         
-        <link rel="stylesheet" type="text/css" href="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><p><strong>Ref的定义</strong>：在React的世界里，<code>refs</code>是一种特殊的属性，它允许我们直接访问DOM节点或React元素。在实际应用中，我们可能需要直接操作DOM、管理焦点、触发动画或集成第三方DOM库，这时<code>refs</code>就显得尤为重要。本文将深入探讨React中几种不同类型的<code>ref</code>，帮助你更好地理解和使用它们。</p>
+        <div class=".article-gallery"><p><strong>Ref的定义</strong>：在React的世界里，<code>refs</code>是一种特殊的属性，它允许我们直接访问DOM节点或React元素。在实际应用中，我们可能需要直接操作DOM、管理焦点、触发动画或集成第三方DOM库，这时<code>refs</code>就显得尤为重要。本文将深入探讨React中几种不同类型的<code>ref</code>，帮助你更好地理解和使用它们。</p>
 <h2 id="createRef：类组件中的引用"><a href="#createRef：类组件中的引用" class="headerlink" title="createRef：类组件中的引用"></a>createRef：类组件中的引用</h2><p><code>createRef</code>是React中最常用的<code>ref</code>类型。主要用于类组件，它可以帮助我们获取DOM元素或类实例的直接引用。</p>
 <h3 id="示例用法"><a href="#示例用法" class="headerlink" title="示例用法"></a>示例用法</h3><p>在类组件中，你可以通过以下方式创建并使用<code>createRef</code>：</p>
 <figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyComponent</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">myRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.myRef&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -185,12 +245,7 @@
 
 <p>这样父组件就可以直接获取到<code>FancyButton</code>组件的DOM引用。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>理解React中的不同类型<code>ref</code>及其用法，对于高效地管理DOM元素和React组件至关重要。无论是类组件还是函数组件，正确地使用<code>refs</code>都可以极大地提高应用的灵活性和效率。</p>
-</div><script src="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
-        var options1 = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
-        }</script>
+</div>
     </div>
 
     <div class="post-meta">
@@ -241,10 +296,20 @@
     </div>
     <br>
     
-    <!-- <div class="post-footer-pre-next">
-        <span>上一篇：<a href=""></a></span>
-        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
-    </div> -->
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2023/12/01/ai/embedding/'>机器学习中的Embedding:你需要了解的一切</a></span>
+                
+
+                
+            </div>
+    
+        
+    
 
     
         
@@ -254,9 +319,9 @@
 
 
 
-                                      
+
                     
-                    
+
                     <div class="footer">
     
         <span> 
@@ -272,8 +337,12 @@
 
             
         </span>
+       
     
 </div>
+
+
+
 <!--这是指一条线往下的内容-->
 <div class="footer-last">
     
@@ -318,14 +387,59 @@
 
 
 
-<script src="/js/lightgallery.min.js"></script>
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
 
 
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
 
                 </div>
             
             
-                <!-- 回到顶部的按钮-->  
+                <!-- 回到顶部的按钮-->
                 <div class="progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -333,7 +447,7 @@
                 </div>
             
             
-                <!-- 返回的按钮-->  
+                <!-- 返回的按钮-->
                 <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -342,3 +456,9 @@
             
     </body>
 </html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

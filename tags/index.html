@@ -56,9 +56,15 @@
     
     
    
-<link rel="stylesheet" href="/css/lightgallery.min.css">
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
 
 
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
@@ -73,15 +79,19 @@
     
     
 
+
+
+
     
     
-    
+
+
     <body>
         <script src="/js/darkmode-js.min.js"></script>
         
         <script>
             const options = {
-                bottom: '53px', // default: '32px'
+                bottom: '40px', // default: '32px'
                 right: 'unset', // default: '32px'
                 left: '42px', // default: 'unset'
                 time: '0.3s', // default: '0.3s'
@@ -98,14 +108,12 @@
         </script>
         
         
-            <div class="left-toc-container">
-                <nav id="toc" class="bs-docs-sidebar"></nav>
-            </div>
+            
         
         <div class="paper">
+
             
-            
-            
+
             
                 <div class="shadow-drop-2-bottom paper-main">
                     
@@ -113,14 +121,26 @@
 
 <div class="header">
     <div class="header-container">
-        <img style="
-        width: 56px;
-        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 0; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.webp" 
+        />
         <div class="header-content">
             <a class="logo" href="/">云天游的博客</a> 
             <span class="description"></span> 
         </div>
-        
     </div>
     
    
@@ -147,8 +167,8 @@
             
         
     </ul>
-</div> 
-        
+</div>
+
                     
                             <br>
 <span><span class="darkmode-ignore">📌</span><i>tags</i></span>
@@ -171,43 +191,8 @@
         </li>
     
         <li class="inline-li">
-            <a href="/tags/Typescript">Typescript</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/%E6%89%93%E6%A0%87">打标</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/%E6%A0%87%E8%AE%B0">标记</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%87%E8%AE%B0">数据标记</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/annotation">annotation</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/mark">mark</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
             <a href="/tags/Zustand">Zustand</a>
             <span><i>2</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/Nodejs">Nodejs</a>
-            <span><i>1</i></span>
         </li>
     
         <li class="inline-li">
@@ -241,6 +226,41 @@
         </li>
     
         <li class="inline-li">
+            <a href="/tags/Typescript">Typescript</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
+            <a href="/tags/%E6%89%93%E6%A0%87">打标</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
+            <a href="/tags/%E6%A0%87%E8%AE%B0">标记</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%87%E8%AE%B0">数据标记</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
+            <a href="/tags/annotation">annotation</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
+            <a href="/tags/mark">mark</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
+            <a href="/tags/Nodejs">Nodejs</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
             <a href="/tags/useCallback">useCallback</a>
             <span><i>1</i></span>
         </li>
@@ -257,16 +277,6 @@
     
         <li class="inline-li">
             <a href="/tags/context">context</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/Embedding">Embedding</a>
             <span><i>1</i></span>
         </li>
     
@@ -290,6 +300,16 @@
             <span><i>1</i></span>
         </li>
     
+        <li class="inline-li">
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+            <span><i>1</i></span>
+        </li>
+    
+        <li class="inline-li">
+            <a href="/tags/Embedding">Embedding</a>
+            <span><i>1</i></span>
+        </li>
+    
     
 </ul>
 
@@ -298,10 +318,10 @@
 
                     
                     
-                    
+
                     <!--说明是文章post页面-->
                     
-                    
+
                     <div class="footer">
     
         <span> 
@@ -317,8 +337,12 @@
 
             
         </span>
+       
     
 </div>
+
+
+
 <!--这是指一条线往下的内容-->
 <div class="footer-last">
     
@@ -363,14 +387,59 @@
 
 
 
-<script src="/js/lightgallery.min.js"></script>
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
 
 
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
 
                 </div>
             
             
-                <!-- 回到顶部的按钮-->  
+                <!-- 回到顶部的按钮-->
                 <div class="progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -378,7 +447,7 @@
                 </div>
             
             
-                <!-- 返回的按钮-->  
+                <!-- 返回的按钮-->
                 <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -387,3 +456,9 @@
             
     </body>
 </html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

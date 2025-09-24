@@ -56,9 +56,15 @@
     
     
    
-<link rel="stylesheet" href="/css/lightgallery.min.css">
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
 
 
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
@@ -73,15 +79,19 @@
     
     
 
+
+
+
     
     
-    
+
+
     <body>
         <script src="/js/darkmode-js.min.js"></script>
         
         <script>
             const options = {
-                bottom: '53px', // default: '32px'
+                bottom: '40px', // default: '32px'
                 right: 'unset', // default: '32px'
                 left: '42px', // default: 'unset'
                 time: '0.3s', // default: '0.3s'
@@ -98,14 +108,16 @@
         </script>
         
         
-            <div class="left-toc-container">
-                <nav id="toc" class="bs-docs-sidebar"></nav>
-            </div>
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
         
         <div class="paper">
+
             
-            
-            
+
             
                 <div class="shadow-drop-2-bottom paper-main">
                     
@@ -113,14 +125,26 @@
 
 <div class="header">
     <div class="header-container">
-        <img style="
-        width: 56px;
-        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 0; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.webp" 
+        />
         <div class="header-content">
             <a class="logo" href="/">云天游的博客</a> 
             <span class="description"></span> 
         </div>
-        
     </div>
     
    
@@ -143,23 +167,59 @@
             
         
     </ul>
-</div> 
-        
+</div>
+
                     
                     
 
                     
                     
-                    
+
                     <!--说明是文章post页面-->
                     
                         <div class="post-main">
+    
 
     
-        <div class="post-main-title">
-            机器学习中的Embedding:你需要了解的一切
-        </div>
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    机器学习中的Embedding:你需要了解的一切
+                </div>
+            
+        
       
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-09-24</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：5.2k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：18分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
@@ -168,7 +228,7 @@
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#One-Hot-Encoding"><span class="post-toc-text">One-Hot Encoding</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SVD"><span class="post-toc-text">SVD</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#BERT"><span class="post-toc-text">BERT</span></a></li></ol>
             
         
-        <link rel="stylesheet" type="text/css" href="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><p>Embedding已经普及到数据科学家的工具箱中，并极大地改变了自然语言处理、计算机视觉和推荐系统的工作方式。然而，许多数据科学家认为它们过时且令人困惑。更多的人在不了解它们是什么的情况下盲目使用它们。在本文中，我们将深入探讨Embedding是什么，它们如何工作，以及它们在实际系统中如何运作。</p>
+        <div class=".article-gallery"><p>Embedding已经普及到数据科学家的工具箱中，并极大地改变了自然语言处理、计算机视觉和推荐系统的工作方式。然而，许多数据科学家认为它们过时且令人困惑。更多的人在不了解它们是什么的情况下盲目使用它们。在本文中，我们将深入探讨Embedding是什么，它们如何工作，以及它们在实际系统中如何运作。</p>
 <p><strong>什么是Embedding?</strong>  </p>
 <p>要理解Embedding，我们首先需要了解机器学习模型的基本要求。具体来说，大多数机器学习算法只能将低维数值数据作为输入。**<br>**</p>
 <p>在下面的神经网络中，每个输入特征都必须是数字。这意味着在诸如推荐系统之类的领域，我们必须将非数字变量（如项目和用户）转换为数字和向量。我们可以尝试通过产品ID来表示项目；然而，神经网络将数字输入视为连续变量。这意味着较高的数字“大于”较低的数字。它还将相似的数字视为相似的项目。对于“年龄”这样的字段来说，这是非常有道理的，但是当数字表示类别变量时，这是没有意义的。在嵌入之前，最常用的方法之一是one-hot encoding。</p>
@@ -276,12 +336,7 @@
 <blockquote>
 <p>原文: <a target="_blank" rel="noopener" href="https://www.featureform.com/post/the-definitive-guide-to-embeddings">https://www.featureform.com/post/the-definitive-guide-to-embeddings</a></p>
 </blockquote>
-</div><script src="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
-        var options1 = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
-        }</script>
+</div>
     </div>
 
     <div class="post-meta">
@@ -320,10 +375,23 @@
     </div>
     <br>
     
-    <!-- <div class="post-footer-pre-next">
-        <span>上一篇：<a href=""></a></span>
-        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
-    </div> -->
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2023/12/02/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Context/'>理解React中的Context</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2023/12/01/react/%E7%90%86%E8%A7%A3React%E4%B8%AD%E7%9A%84Ref/">理解React中的Ref</a>
+                    </span>
+                
+            </div>
+    
+        
+    
 
     
         
@@ -333,9 +401,9 @@
 
 
 
-                                      
+
                     
-                    
+
                     <div class="footer">
     
         <span> 
@@ -351,8 +419,12 @@
 
             
         </span>
+       
     
 </div>
+
+
+
 <!--这是指一条线往下的内容-->
 <div class="footer-last">
     
@@ -397,14 +469,59 @@
 
 
 
-<script src="/js/lightgallery.min.js"></script>
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
 
 
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
 
                 </div>
             
             
-                <!-- 回到顶部的按钮-->  
+                <!-- 回到顶部的按钮-->
                 <div class="progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -412,7 +529,7 @@
                 </div>
             
             
-                <!-- 返回的按钮-->  
+                <!-- 返回的按钮-->
                 <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -421,3 +538,9 @@
             
     </body>
 </html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>

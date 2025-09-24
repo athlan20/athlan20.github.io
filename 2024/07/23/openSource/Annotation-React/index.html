@@ -56,9 +56,15 @@
     
     
    
-<link rel="stylesheet" href="/css/lightgallery.min.css">
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
 
 
+   
+        
+<link rel="stylesheet" href="/css/custom.css">
+
+    
+    <link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' /> 
 <meta name="generator" content="Hexo 7.1.1"></head>
     
     
@@ -73,15 +79,19 @@
     
     
 
+
+
+
     
     
-    
+
+
     <body>
         <script src="/js/darkmode-js.min.js"></script>
         
         <script>
             const options = {
-                bottom: '53px', // default: '32px'
+                bottom: '40px', // default: '32px'
                 right: 'unset', // default: '32px'
                 left: '42px', // default: 'unset'
                 time: '0.3s', // default: '0.3s'
@@ -98,14 +108,16 @@
         </script>
         
         
-            <div class="left-toc-container">
-                <nav id="toc" class="bs-docs-sidebar"></nav>
-            </div>
+            
+                <div class="left-toc-container">
+                    <nav id="toc" class="bs-docs-sidebar"></nav>
+                </div>
+            
         
         <div class="paper">
+
             
-            
-            
+
             
                 <div class="shadow-drop-2-bottom paper-main">
                     
@@ -113,14 +125,26 @@
 
 <div class="header">
     <div class="header-container">
-        <img style="
-        width: 56px;
-        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <style>
+            .header-img {
+                width: 56px;
+                height: auto;
+                object-fit: cover; /* 保持图片比例 */
+                transition: transform 0.3s ease-in-out; 
+                border-radius: 0; 
+            }
+            
+        </style>
+        <img 
+            alt="^-^" 
+            cache-control="max-age=86400" 
+            class="header-img" 
+            src="/img/favicon.webp" 
+        />
         <div class="header-content">
             <a class="logo" href="/">云天游的博客</a> 
             <span class="description"></span> 
         </div>
-        
     </div>
     
    
@@ -143,23 +167,59 @@
             
         
     </ul>
-</div> 
-        
+</div>
+
                     
                     
 
                     
                     
-                    
+
                     <!--说明是文章post页面-->
                     
                         <div class="post-main">
+    
 
     
-        <div class="post-main-title">
-            轻松实现文本标注：介绍 Annotation-React 库
-        </div>
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    轻松实现文本标注：介绍 Annotation-React 库
+                </div>
+            
+        
       
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2025-09-24</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：422</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：1分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
     
 
     <div class="post-md">
@@ -168,7 +228,7 @@
                 <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="post-toc-text">快速开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="post-toc-text">使用示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="post-toc-text">参数说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9B%B4%E5%A4%9A%E5%8F%82%E6%95%B0"><span class="post-toc-text">更多参数</span></a></li></ol></li></ol>
             
         
-        <link rel="stylesheet" type="text/css" href="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/css/lightgallery.min.css" /><div class=".article-gallery"><p>文本标注功能在教育、数据分析、内容管理等领域中变得越来越重要。为了帮助开发者更轻松地实现这一功能，我写了这个 <a target="_blank" rel="noopener" href="https://github.com/athlan20/annotation-react"><code>Annotation-React</code></a> 库。这个库可以让你在 React 应用中轻松地对文章或段落中的单词或句子进行划线打标。</p>
+        <div class=".article-gallery"><p>文本标注功能在教育、数据分析、内容管理等领域中变得越来越重要。为了帮助开发者更轻松地实现这一功能，我写了这个 <a target="_blank" rel="noopener" href="https://github.com/athlan20/annotation-react"><code>Annotation-React</code></a> 库。这个库可以让你在 React 应用中轻松地对文章或段落中的单词或句子进行划线打标。</p>
 <p>功能目前较简单，一张gif就能演示完成如下:</p>
 <p align=center><a target="_blank" rel="noopener" href="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/83569e4fd1d249ce8f4b72508774a08b~tplv-73owjymdk6-watermark.image?policy=eyJ2bSI6MywidWlkIjoiMjQxODU4MTMwOTc1NTczNiJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1722303499&x-orig-sign=8D0HkgddDHm3JcVfWfqObH5b7OE%3D" title="347661503-2cd02c10-ef7c-47f3-b61d-173e22cee41b.gif" class="gallery-item" style="box-shadow: none;"> <img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/83569e4fd1d249ce8f4b72508774a08b~tplv-73owjymdk6-watermark.image?policy=eyJ2bSI6MywidWlkIjoiMjQxODU4MTMwOTc1NTczNiJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1722303499&x-orig-sign=8D0HkgddDHm3JcVfWfqObH5b7OE%3D" alt="347661503-2cd02c10-ef7c-47f3-b61d-173e22cee41b.gif"  /></a></p>
 
@@ -190,12 +250,7 @@
 
 <p>目前项目刚发布第一个版本，有不足的地方希望大家多提pr</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/athlan20/annotation-react">项目git地址</a></p>
-</div><script src="https://jsd.cdn.zzko.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
-        var options1 = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
-        }</script>
+</div>
     </div>
 
     <div class="post-meta">
@@ -254,10 +309,21 @@
     </div>
     <br>
     
-    <!-- <div class="post-footer-pre-next">
-        <span>上一篇：<a href=""></a></span>
-        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
-    </div> -->
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2024/03/03/react/Zustand%E7%9B%AE%E5%BD%95%E8%AE%BE%E8%AE%A1/">Zustand目录设计</a>
+                    </span>
+                
+            </div>
+    
+        
+    
 
     
         
@@ -267,9 +333,9 @@
 
 
 
-                                      
+
                     
-                    
+
                     <div class="footer">
     
         <span> 
@@ -285,8 +351,12 @@
 
             
         </span>
+       
     
 </div>
+
+
+
 <!--这是指一条线往下的内容-->
 <div class="footer-last">
     
@@ -331,14 +401,59 @@
 
 
 
-<script src="/js/lightgallery.min.js"></script>
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
 
 
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
 
                 </div>
             
             
-                <!-- 回到顶部的按钮-->  
+                <!-- 回到顶部的按钮-->
                 <div class="progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -346,7 +461,7 @@
                 </div>
             
             
-                <!-- 返回的按钮-->  
+                <!-- 返回的按钮-->
                 <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
                     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -355,3 +470,9 @@
             
     </body>
 </html>
+<script src="/js/emojiHandler.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        wrapEmojis('.paper');
+    });
+</script>
